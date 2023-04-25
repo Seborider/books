@@ -1,1 +1,120 @@
-/* You can add global styles to this file, and also import other style files */
+* {
+  font-family: 'Roboto Mono', monospace;
+}
+
+.content {
+  max-width: 1080px;
+  margin: auto;
+}
+
+$black: rgb(16, 24, 50);
+$white: rgb(255, 255, 255);
+$yellow-purple-gradient: linear-gradient(to top, #ff73f2, #fffc8d);
+
+.container {
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+.button {
+  color: $black;
+  display: block;
+  letter-spacing: 0.075em;
+  padding: 0.8em 1em;
+  margin: auto 1em;
+  position: relative;
+  align-self: center;
+  z-index: 1;
+  box-shadow: -0.5em 0.5em transparentize($black, 1);
+  transform-origin: left bottom;
+  transition: all 200ms ease-in-out;
+  text-decoration: none;
+  background: $white;
+
+  &:before,
+  &:after {
+    content: '';
+    position: absolute;
+  }
+
+  &:before {
+    left: -0.59em;
+    top: 0.15em;
+    width: 0.31em;
+    height: 100%;
+    transform: skewY(-45deg);
+  }
+
+  &:after {
+    bottom: -0.61em;
+    right: 0.16em;
+    width: 100%;
+    height: 0.31em;
+    transform: skewX(-45deg);
+  }
+
+  &:hover {
+    background-size: 90%;
+    transform: translate(0.5em, -0.5em);
+    box-shadow: -1em 1em 0.15em transparentize($black, 0.9);
+    background: $yellow-purple-gradient;
+
+    &:before {
+      height: calc(100% - 0.13em);
+    }
+
+    &:after {
+      width: calc(100% - 0.13em);
+    }
+  }
+
+  &:active {
+    transform: translateY(4px);
+  }
+}
+
+.side {
+  color: $white;
+
+  &:before {
+    left: -0.75em;
+    top: 0.15em;
+  }
+
+  &:after {
+    bottom: -0.75em;
+    right: 0.15em;
+  }
+
+  &:hover {
+    color: $black;
+
+    &:before {
+      height: 100%;
+    }
+    &:after {
+      width: 100%;
+    }
+  }
+}
+
+.background {
+  border: 0.16em solid $black;
+  color: $black;
+
+  &:before,
+  &:after {
+    background: $black;
+    border: 0.16em solid $black;
+  }
+  &:before,
+  &:after {
+    background: $black;
+  }
+}
+
+.active-button {
+  background: $yellow-purple-gradient;
+}
