@@ -6,10 +6,10 @@ import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
   selector: 'books-register',
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule],
-  templateUrl: './register.component.html',
-  styleUrls: ['./register.component.scss'],
+  templateUrl: './signup.component.html',
+  styleUrls: ['./signup.component.scss'],
 })
-export class RegisterComponent {
+export class SignupComponent {
   register = new FormGroup({
     username: new FormControl(''),
     password: new FormControl(''),
