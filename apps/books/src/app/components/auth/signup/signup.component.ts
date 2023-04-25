@@ -13,7 +13,6 @@ export class SignupComponent {
   register = new FormGroup({
     username: new FormControl(''),
     password: new FormControl(''),
-    repeatPassword: new FormControl(''),
   });
 
   submit() {

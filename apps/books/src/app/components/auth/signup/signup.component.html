@@ -1,4 +1,5 @@
-<div class="register-container">
+<div class="page-container">
+  <div class="signup-container">
   <form class="form-wrapper" [formGroup]="register" (ngSubmit)="submit()">
     <label>
       Username:
@@ -8,12 +9,9 @@
       Password:
       <input class="input" type="password" formControlName="password" />
     </label>
-    <label>
-      Repeat Password:
-      <input class="input" type="password" formControlName="repeatPassword" />
-    </label>
     <button class="button background side" type="submit">
-      Submit Application
+      Signup
     </button>
   </form>
+  </div>
 </div>
