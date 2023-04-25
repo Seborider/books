@@ -7,7 +7,7 @@ import { Password } from '../services/password';
 const router = express.Router();
 
 router.post(
-  '/api/users/signin',
+  '/api/auth/users/login',
   async (req: Request, res: Response, next: NextFunction) => {
     const { username, password } = req.body;
 
