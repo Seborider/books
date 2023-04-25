@@ -1,0 +1,17 @@
+.form-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  width: 30%;
+}
+
+.register-container {
+  max-width: 50em;
+  margin: auto;
+  display: flex;
+  justify-content: center;
+}
+
+.input {
+  width: 17.5em;
+}
