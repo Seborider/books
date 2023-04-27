@@ -1,11 +1,12 @@
-
 import mongoose from "mongoose";
 import express from "express";
+import * as dotenv from 'dotenv'
 import { Request, Response, NextFunction } from "express";
 import { json } from "body-parser";
 import { signinRouter } from "./routes/login";
 import { signupRouter } from "./routes/signup";
 
+dotenv.config()
 const app = express();
 
 app.use(json());
@@ -26,7 +27,7 @@ app.use((err: Error, req: Request, res: Response) => {
 
 const initializeConfig = async () => {
   try {
-    await mongoose.connect('mongodb+srv://sebo:RkVZfkYyplfT6c8s@clusterbooks.h216fz7.mongodb.net/Users?retryWrites=true&w=majority');
+    await mongoose.connect(`${process.env.MONGO_URI}`);
     console.log('Connected to MongoDb')
   } catch (error) {
     console.log(error)
