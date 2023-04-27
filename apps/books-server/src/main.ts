@@ -26,7 +26,7 @@ app.use((err: Error, req: Request, res: Response) => {
 
 const initializeConfig = async () => {
   try {
-    await mongoose.connect('mongodb+srv://sebo:2idcwn2I@clusterbooks.h216fz7.mongodb.net/Users?retryWrites=true&w=majority');
+    await mongoose.connect('mongodb+srv://sebo:RkVZfkYyplfT6c8s@clusterbooks.h216fz7.mongodb.net/Users?retryWrites=true&w=majority');
     console.log('Connected to MongoDb')
   } catch (error) {
     console.log(error)
