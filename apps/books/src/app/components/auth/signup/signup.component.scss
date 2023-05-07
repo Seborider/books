@@ -1,26 +1,121 @@
-.form-wrapper {
-  display: flex;
-  flex-direction: column;
-  gap: 1em;
-  width: 60%;
-}
-
 .page-container {
-  max-width: 50em;
-  margin: auto;
-  display: flex;
-  justify-content: center;
-}
-
-.input {
-  width: 9.5em;
+    max-width: 50em;
+    margin: auto;
+    display: flex;
+    justify-content: center;
 }
 
 .signup-container {
-  display: flex;
-  justify-content: center;
-  border: 5px solid black;
-  padding: 3em;
-  margin: 3em;
-  box-shadow: -1em 1em 0.15em transparentize(black, 0.9);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 5px solid black;
+    padding: 3em;
+    margin: 3em;
+    box-shadow: -1em 1em 0.15em transparentize(black, 0.9);
+    min-width: 30em;
+}
+
+.form-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    align-items: center;
+}
+
+.label {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.input {
+    max-width: 30em;
+    min-width: 20em;
+    border: 2px solid black;
+    min-height: 3em;
+    padding-left: 1em;
+    transition: all 0.5s ease-in;
+}
+
+.input:focus {
+    outline: none;
+}
+
+.slow-appear-hint {
+    animation: fadeInHint 10s;
+}
+
+@keyframes fadeInHint {
+    0% {
+        visibility: hidden;
+        opacity: 0;
+    }
+    50% {
+        opacity: 1;
+    }
+    100% {
+        visibility: visible;
+        opacity: 1;
+    }
+}
+
+.slow-appear {
+    animation: fadeIn 1.5s;
+}
+
+@keyframes fadeIn {
+    0% {
+        visibility: hidden;
+        opacity: 0;
+    }
+    100% {
+        visibility: visible;
+        opacity: 1;
+    }
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+    transition: background-color 9999s ease-in-out 0s;
+    -webkit-box-shadow: 0 0 0 1000px white inset;
+}
+
+input[type='checkbox'] {
+    appearance: none;
+    margin-left: 1em;
+    width: 1.5em;
+    height: 1.5em;
+    border: 0.15em solid;
+    transform: translateY(-0.075em);
+    display: grid;
+    place-content: center;
+}
+
+input[type='checkbox']::before {
+    content: '';
+    width: 1em;
+    height: 1em;
+    clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);
+    transform: scale(0);
+    transform-origin: bottom left;
+    transition: 100ms transform ease-in-out;
+    box-shadow: inset 1em 1em #ff73f2;
+    background-color: black;
+}
+
+input[type='checkbox']:checked::before {
+    transform: scale(1);
+}
+
+.error-message {
+    color: red;
+    font-size: 0.75em;
+}
+
+.hint-message {
+    font-size: 0.75em;
 }

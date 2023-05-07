@@ -1,1 +1,25 @@
-<p>login works!</p>
+<div class="page-container">
+    <div class="login-container">
+        <form class="form-wrapper" [formGroup]="loginUserForm" (ngSubmit)="submit()">
+            <div>Please enter your credentials</div>
+            <input
+                class="input slow-appear"
+                type="text"
+                placeholder="Username"
+                formControlName="username"
+            />
+            <input
+                class="input slow-appear"
+                type="text"
+                placeholder="Password"
+                formControlName="password"
+            />
+            <button
+                class="button background side slow-appear"
+                type="submit"
+            >
+                Signin
+            </button>
+        </form>
+    </div>
+</div>
