@@ -1,0 +1,61 @@
+.page-container {
+    max-width: 50em;
+    margin: auto;
+    display: flex;
+    justify-content: center;
+}
+
+.login-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 5px solid black;
+    padding: 3em;
+    margin: 3em;
+    box-shadow: -1em 1em 0.15em transparentize(black, 0.9);
+    min-width: 30em;
+}
+
+.form-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    align-items: center;
+}
+
+.input {
+    max-width: 30em;
+    min-width: 20em;
+    border: 2px solid black;
+    min-height: 3em;
+    padding-left: 1em;
+    transition: all 0.5s ease-in;
+}
+
+.input:focus {
+    outline: none;
+}
+
+.slow-appear {
+    animation: fadeIn 1.5s;
+}
+
+@keyframes fadeIn {
+    0% {
+        visibility: hidden;
+        opacity: 0;
+    }
+    100% {
+        visibility: visible;
+        opacity: 1;
+    }
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+    transition: background-color 9999s ease-in-out 0s;
+    -webkit-box-shadow: 0 0 0 1000px white inset;
+}

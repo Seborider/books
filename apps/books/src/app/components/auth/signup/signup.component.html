@@ -1,17 +1,154 @@
 <div class="page-container">
-  <div class="signup-container">
-  <form class="form-wrapper" [formGroup]="register" (ngSubmit)="submit()">
-    <label>
-      Username:
-      <input class="input" type="text" formControlName="username" />
-    </label>
-    <label>
-      Password:
-      <input class="input" type="password" formControlName="password" />
-    </label>
-    <button class="button background side" type="submit">
-      Signup
-    </button>
-  </form>
-  </div>
+    <div class="signup-container">
+        <form
+            class="form-wrapper"
+            [formGroup]="signupUserForm"
+            (ngSubmit)="submit()"
+        >
+            <div>Please enter your credentials</div>
+            <div *ngIf="!signupUserForm.controls.firstName.valid"></div>
+            <input
+                class="input slow-appear"
+                type="text"
+                formControlName="firstName"
+                placeholder="First Name"
+            />
+            <div
+                *ngIf="signupUserForm.controls.firstName?.errors?.['minlength']"
+                class="hint-message slow-appear-hint"
+            >
+                Your First Name must have at least 2 characters.
+            </div>
+            <div
+                *ngIf="signupUserForm.controls.firstName?.errors?.['maxlength']"
+                class="error-message slow-appear"
+            >
+                Your First Name should not exceed 20 characters.
+            </div>
+            <div
+                *ngIf="signupUserForm.controls.firstName?.errors?.['pattern']"
+                class="error-message slow-appear"
+            >
+                Your First Name cannot contain numbers.
+            </div>
+            <input
+                *ngIf="signupUserForm.controls.firstName.valid"
+                class="input slow-appear"
+                type="text"
+                formControlName="lastName"
+                placeholder="Last Name"
+            />
+            <div
+                *ngIf="signupUserForm.controls.lastName?.errors?.['minlength']"
+                class="hint-message slow-appear-hint"
+            >
+                Your Last Name must have at least 2 characters.
+            </div>
+            <div
+                *ngIf="signupUserForm.controls.lastName?.errors?.['maxlength']"
+                class="error-message slow-appear"
+            >
+                Your Last Name should not exceed 20 characters.
+            </div>
+            <div
+                *ngIf="signupUserForm.controls.lastName?.errors?.['pattern']"
+                class="error-message slow-appear"
+            >
+                Your Last Name cannot contain numbers.
+            </div>
+            <input
+                *ngIf="signupUserForm.controls.lastName.valid"
+                class="input slow-appear"
+                type="text"
+                formControlName="email"
+                placeholder="Email"
+            />
+            <div
+                *ngIf="signupUserForm.controls.email?.errors?.['pattern']"
+                class="hint-message slow-appear-hint"
+            >
+                Please provide a correct email address.
+            </div>
+            <input
+                *ngIf="signupUserForm.controls.email.valid"
+                class="input"
+                type="text"
+                formControlName="username"
+                placeholder="Username"
+            />
+            <div
+                *ngIf="signupUserForm.controls.username?.errors?.['minlength']"
+                class="hint-message slow-appear"
+            >
+                Your Username must have at least 4 characters.
+            </div>
+            <div
+                *ngIf="signupUserForm.controls.username?.errors?.['maxlength']"
+                class="error-message slow-appear"
+            >
+                Your Username should not exceed 20 characters.
+            </div>
+            <div
+                *ngIf="signupUserForm.controls.username?.errors?.['pattern']"
+                class="error-message slow-appear"
+            >
+                Your Username must exist of alphanumeric characters.
+            </div>
+            <div
+                class="error-message slow-appear"
+                *ngIf="signupUserForm.controls.username?.errors?.['existingUser']"
+            >
+                This Username is already in use.
+            </div>
+            <input
+                *ngIf="signupUserForm.controls.username.valid"
+                class="input slow-appear"
+                type="password"
+                formControlName="password"
+                placeholder="Password"
+            />
+            <input
+                *ngIf="signupUserForm.controls.password.valid"
+                class="input slow-appear"
+                type="password"
+                formControlName="passwordConfirmation"
+                placeholder="Confirm your Password"
+            />
+
+            <div
+                *ngIf="signupUserForm.controls.passwordConfirmation.dirty && signupUserForm.errors?.['passwordsDontMatch']"
+                class="error-message slow-appear"
+            >
+                Password and Password Confirmation must match.
+            </div>
+            <div
+                *ngIf="signupUserForm.controls.password.errors?.['minlength']"
+                class="hint-message slow-appear"
+            >
+                Your Password should have at least 8 characters.
+            </div>
+            <div
+                *ngIf="signupUserForm.controls.password?.errors?.['maxlength']"
+                class="error-message slow-appear"
+            >
+                Your Password should not exceed 16 characters.
+            </div>
+            <label
+                *ngIf="signupUserForm.controls.passwordConfirmation.valid"
+                class="label"
+            >
+                <div>Please accept our AGB</div>
+                <input type="checkbox" formControlName="checkbox" />
+            </label>
+
+            <div *ngIf="signupUserForm.valid">
+                <button
+                    class="button background side slow-appear"
+                    type="submit"
+                >
+                    Signup
+                </button>
+            </div>
+        </form>
+    </div>
 </div>

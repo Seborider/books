@@ -9,6 +9,7 @@
 
 $black: rgb(16, 24, 50);
 $white: rgb(255, 255, 255);
+$grey: rgb(220,220,220);
 $yellow-purple-gradient: linear-gradient(to top, #ff73f2, #fffc8d);
 
 .container {
@@ -67,6 +68,15 @@ $yellow-purple-gradient: linear-gradient(to top, #ff73f2, #fffc8d);
 
     &:after {
       width: calc(100% - 0.13em);
+    }
+
+    &:disabled {
+      &:hover {
+        background-size: 90%;
+        transform: translate(0,0);
+        background: red;
+        box-shadow: -0.5em 0.5em transparentize($white, 1);
+      }
     }
   }
 
