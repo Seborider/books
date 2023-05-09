@@ -107,9 +107,9 @@ export class SignupComponent {
             const user = this.signupUserForm.value;
             //call signup method of signupServide class, pass the form as tyoe of IUser. It returns an Observable, so it can be subscribed to
             this.signupService.signup(user as IUser).subscribe({
-                //redirect to '/home' - route
+                //redirect to '/signupSuccessful' - route
                 next: () => {
-                    this.router.navigateByUrl('/home');
+                    this.router.navigateByUrl('/signupSuccessful');
                 },
             });
         }
