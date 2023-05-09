@@ -1,3 +1,4 @@
+//built-in methods in crypto module of node.js
 import { scryptSync, randomBytes } from 'crypto';
 export class Password {
     static toHash(password: string) {
