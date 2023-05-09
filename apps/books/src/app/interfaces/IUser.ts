@@ -1,4 +1,4 @@
-export interface User {
+export interface IUser {
     firstName: string;
     lastName: string;
     email: string;
@@ -7,7 +7,7 @@ export interface User {
     passwordConfirmation: string;
 }
 
-export interface usernameAvailabeResponse {
+export interface IUsernameAvailableResponse {
     available?: boolean;
     exists: boolean;
 }

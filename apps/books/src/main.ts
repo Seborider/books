@@ -1,21 +1,21 @@
 import { bootstrapApplication } from '@angular/platform-browser';
 import {
-  provideRouter,
-  withEnabledBlockingInitialNavigation,
+    provideRouter,
+    withEnabledBlockingInitialNavigation,
 } from '@angular/router';
 import { appRoutes } from './app/app.routes';
 import { AppComponent } from './app/app.component';
 import { provideHttpClient } from '@angular/common/http';
 import { UserService } from './app/services/user.service';
 import { PasswordMatch } from './app/components/auth/password-match';
-import {UniqueUsername} from "./app/components/auth/unique-user";
+import { ExistingUsername } from './app/components/auth/existing-username';
 
 bootstrapApplication(AppComponent, {
-  providers: [
-    provideRouter(appRoutes, withEnabledBlockingInitialNavigation()),
-    provideHttpClient(),
-    UserService,
-    PasswordMatch,
-    UniqueUsername
-  ],
+    providers: [
+        provideRouter(appRoutes, withEnabledBlockingInitialNavigation()),
+        provideHttpClient(),
+        UserService,
+        PasswordMatch,
+        ExistingUsername,
+    ],
 }).catch((err) => console.error(err));

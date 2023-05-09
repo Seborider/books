@@ -1,5 +1,9 @@
 <div class="page-container">
     <div class="signup-container">
+        <!--
+        - bind form to signupUserForm
+        - call submit on form submit
+        -->
         <form
             class="form-wrapper"
             [formGroup]="signupUserForm"
@@ -13,6 +17,9 @@
                 formControlName="firstName"
                 placeholder="First Name"
             />
+            <!--
+            - check for min length errors
+            -->
             <div
                 *ngIf="signupUserForm.controls.firstName?.errors?.['minlength']"
                 class="hint-message slow-appear-hint"
@@ -94,6 +101,9 @@
             >
                 Your Username must exist of alphanumeric characters.
             </div>
+            <!--
+                - existingUser property is checked
+                -->
             <div
                 class="error-message slow-appear"
                 *ngIf="signupUserForm.controls.username?.errors?.['existingUser']"
@@ -114,7 +124,10 @@
                 formControlName="passwordConfirmation"
                 placeholder="Confirm your Password"
             />
-
+            <!--
+                - passwordConfirmation is dirty (changed by the user)
+                - passwordsDontMatch property is checked
+                -->
             <div
                 *ngIf="signupUserForm.controls.passwordConfirmation.dirty && signupUserForm.errors?.['passwordsDontMatch']"
                 class="error-message slow-appear"
