@@ -1,7 +1,15 @@
 .navigation-wrapper {
     display: flex;
-    flex-direction: row-reverse;
+    flex-direction: row;
     width: 100%;
-    padding-bottom: 2em;
+    padding: 1em;
+    justify-content: space-between;
+}
+
+.button-wrapper {
+    display: flex;
+    flex-direction: row;
     justify-content: flex-end;
 }
+
+

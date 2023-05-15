@@ -39,8 +39,11 @@ router.post(
             `${process.env.JWT_SECRET}`
         );
 
-        //sets the response status to 200 (OK) and sends the signed JWT as the 'token' property in the body
-        res.status(200).send({ token: userJwt });
+        //set headers for response
+        res.setHeader('Authorization', `Bearer ${userJwt}`);
+
+        //sets the response status to 200 (OK) and sends an empty object
+        res.status(200).send({ user: existingUser });
     }
 );
 

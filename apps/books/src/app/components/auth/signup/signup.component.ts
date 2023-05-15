@@ -8,7 +8,7 @@ import {
 } from '@angular/forms';
 import { UserService } from '../../../services/user.service';
 import { IUser } from '../../../interfaces/IUser';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { PasswordMatch } from '../password-match';
 import { ExistingUsername } from '../existing-username';
 
@@ -16,7 +16,7 @@ import { ExistingUsername } from '../existing-username';
 @Component({
     selector: 'books-signup',
     standalone: true,
-    imports: [CommonModule, ReactiveFormsModule],
+    imports: [CommonModule, ReactiveFormsModule, RouterLink],
     templateUrl: './signup.component.html',
     styleUrls: ['./signup.component.scss'],
 })

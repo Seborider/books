@@ -1,18 +1,32 @@
 <div class="content">
-    <h3>Books</h3>
     <nav class="navigation-wrapper">
-        <a
-            class="button side background"
-            routerLink="/signup"
-            routerLinkActive="active-button"
-            >signup</a
-        >
-        <a
-            class="button side background"
-            routerLink="/login"
-            routerLinkActive="active-button"
-            >log in</a
-        >
+        <a routerLink="/" routerLinkActive="title">
+            <h1>Books</h1>
+        </a>
+        <div class="button-wrapper">
+            <a
+                *ngIf="(isLoggedIn$ | async) === false"
+                class="button side background"
+                routerLink="/signup"
+                routerLinkActive="active-button"
+                >signup</a
+            >
+            <a
+                *ngIf="(isLoggedIn$ | async) === false"
+                class="button side background"
+                routerLink="/login"
+                routerLinkActive="active-button"
+                >log in</a
+            >
+            <a
+                *ngIf="isLoggedIn$ | async"
+                class="button side background"
+                routerLink="/login"
+                routerLinkActive="active-button"
+                (click)="authService.logout()"
+                >log out</a
+            >
+        </div>
     </nav>
     <router-outlet></router-outlet>
 </div>

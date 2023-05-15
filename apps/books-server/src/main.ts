@@ -12,11 +12,15 @@ import cors from 'cors';
 dotenv.config();
 //initializing the Express application
 const app = express();
+//specify that the 'Authorization' header should be exposed.
+const corsOptions = {
+    exposedHeaders: 'Authorization',
+};
 
 //registering middleware
 app.use(json());
 app.use(express.urlencoded({ extended: true }));
-app.use(cors());
+app.use(cors(corsOptions));
 
 //registering route handlers
 app.use(signinRouter);
