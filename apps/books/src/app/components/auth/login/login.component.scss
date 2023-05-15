@@ -59,3 +59,12 @@ input:-webkit-autofill:active {
     transition: background-color 9999s ease-in-out 0s;
     -webkit-box-shadow: 0 0 0 1000px white inset;
 }
+
+.username-exists {
+    color: green;
+}
+
+.error-message {
+    color: red;
+    font-size: 0.75em;
+}

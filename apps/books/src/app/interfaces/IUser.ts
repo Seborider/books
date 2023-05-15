@@ -1,4 +1,7 @@
 export interface IUser {
+    token: string;
+    expires_at: string;
+    user: IUser | null;
     firstName: string;
     lastName: string;
     email: string;

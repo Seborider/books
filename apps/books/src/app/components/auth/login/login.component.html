@@ -1,25 +1,52 @@
 <div class="page-container">
     <div class="login-container">
-        <form class="form-wrapper" [formGroup]="loginUserForm" (ngSubmit)="submit()">
+        <form
+            class="form-wrapper"
+            [formGroup]="loginUserForm"
+            (ngSubmit)="submit()"
+        >
             <div>Please enter your credentials</div>
             <input
-                class="input slow-appear"
+                class="input slow-appear username-exists"
                 type="text"
                 placeholder="Username"
                 formControlName="username"
+                [ngClass]="{'username-exists' : loginUserForm.controls.username.errors?.['existingUser'] }"
             />
+            <div
+                class="error-message slow-appear"
+                *ngIf="loginUserForm.controls.username.dirty && !loginUserForm.controls.username?.errors?.['existingUser']"
+            >
+                This Username is not registered.
+            </div>
             <input
                 class="input slow-appear"
                 type="password"
                 placeholder="Password"
                 formControlName="password"
             />
-            <button
-                class="button background side slow-appear"
-                type="submit"
+            <div
+                class="error-message slow-appear"
+                *ngIf="loginUserForm.controls.password.errors?.['minlength']"
             >
-                log in
-            </button>
+                No valid password was provided.
+            </div>
+            <div
+                *ngIf="
+                    !loginUserForm.valid &&
+                    loginUserForm.controls.password.dirty
+                "
+            >
+                <button
+                    class="button background side slow-appear"
+                    type="submit"
+                >
+                    log in
+                </button>
+            </div>
+            <div class="hint-message">
+                Don't have an account? <a class="link" routerLink="/signup">Sign up!</a>
+            </div>
         </form>
     </div>
 </div>

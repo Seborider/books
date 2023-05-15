@@ -5,7 +5,7 @@ import { User } from '../models/user';
 const router = express.Router();
 
 //route handler for post request to '/signup' - endpoint
-router.post('/api/users/signup', async (req: Request, res: Response) => {
+router.post('/api/auth/users/signup', async (req: Request, res: Response) => {
     // destructure the request body
     const {
         firstName,

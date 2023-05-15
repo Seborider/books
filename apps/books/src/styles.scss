@@ -128,3 +128,22 @@ $yellow-purple-gradient: linear-gradient(to top, #ff73f2, #fffc8d);
 .active-button {
   background: $yellow-purple-gradient;
 }
+
+.title {
+    text-decoration: none;
+    color: black;
+
+}
+.title:active{
+    text-decoration: none;
+    color: #ff73f2;
+}
+
+.link {
+    text-decoration: none;
+    color: #ff73f2;
+}
+.link:active {
+    text-decoration: none;
+    color: $black;
+}
