@@ -27,25 +27,18 @@
             />
             <div
                 class="error-message slow-appear"
-                *ngIf="loginUserForm.controls.password.errors?.['minlength']"
+                *ngIf="submitClicked && loginUserForm.errors?.['invalidCredentials'] &&
+                    loginUserForm.controls.password.touched"
             >
-                No valid password was provided.
+                No correct password was provided.
             </div>
-            <div
-                *ngIf="
-                    !loginUserForm.valid &&
-                    loginUserForm.controls.password.dirty
-                "
-            >
-                <button
-                    class="button background side slow-appear"
-                    type="submit"
-                >
-                    log in
-                </button>
-            </div>
+
+            <button class="button background side" type="submit">
+                log in
+            </button>
             <div class="hint-message">
-                Don't have an account? <a class="link" routerLink="/signup">Sign up!</a>
+                Don't have an account?
+                <a class="link" routerLink="/signup">Sign up!</a>
             </div>
         </form>
     </div>

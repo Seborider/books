@@ -12,6 +12,7 @@ import { IUser } from '../../../interfaces/IUser';
 import { Router, RouterLink } from '@angular/router';
 import { HttpResponse } from '@angular/common/http';
 import { AuthService } from '../../../services/auth-service';
+import { PasswordCorrect } from '../password-correct';
 
 @Component({
     selector: 'books-login',
@@ -21,21 +22,31 @@ import { AuthService } from '../../../services/auth-service';
     styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent {
+    submitClicked = false;
+
     constructor(
         private uniqueUser: ExistingUsername,
         private userService: UserService,
         private router: Router,
-        private authService: AuthService
+        private authService: AuthService,
+        private passwordCorrect: PasswordCorrect
     ) {}
 
     loginUserForm = new FormGroup({
         username: new FormControl('', [], this.uniqueUser.validate),
-        password: new FormControl('', [Validators.minLength(8)]),
+        password: new FormControl(''),
     });
 
     submit() {
-        //point to values from the login form
+        this.submitClicked = true;
+        this.setValidators();
+
+        //point user to values from the login form
         const user = this.loginUserForm.value;
+
+        //reset form state
+        this.loginUserForm.markAsPending();
+
         //handle the observable returned by the login method of user-service
         this.userService.login(user as IUser).subscribe({
             //take the server's response
@@ -55,6 +66,21 @@ export class LoginComponent {
                     console.error('No token in response');
                 }
             },
+            error: () => {
+                this.loginUserForm.setErrors({ invalidCredentials: true });
+            },
         });
+    }
+
+    //avoid validating the password on initialisation of component
+    setValidators() {
+        const passwordControl = this.loginUserForm.get('password');
+
+        if (passwordControl) {
+            passwordControl.setValidators([Validators.minLength(8)]);
+            passwordControl.setAsyncValidators(this.passwordCorrect.validate);
+            //re-calculates the value and validation status of the control
+            passwordControl.updateValueAndValidity();
+        }
     }
 }
