@@ -23,7 +23,6 @@ export class HomeComponent implements OnInit, OnDestroy {
             (data) => {
                 if (data !== null) {
                     this.currentUser = data;
-                    console.log(this.currentUser, 'user in home');
                 } else {
                     //handle the case when the user is null, e.g., clear the user state
                     this.currentUser = null;

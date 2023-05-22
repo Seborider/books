@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpResponse } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, throwError } from 'rxjs';
 import { IUser, IUsernameAvailableResponse } from '../interfaces/IUser';
+import { catchError } from 'rxjs/operators';
 
 //decorator, that declares this class as usable in other classes with dependency injection
 @Injectable()
@@ -30,5 +31,26 @@ export class UserService {
         return this.http.post<IUsernameAvailableResponse>(url, {
             username: username,
         });
+    }
+
+    //take username and password as strings and post then to the '/sigin' - endpoint
+    passwordCorrect(username: string, password: string) {
+        const url = `${this.apiUrl}/auth/users/signin`;
+        return this.http
+            .post<IUser>(
+                url,
+                { username: username, password: password },
+                //return the full HttpResponse.
+                { observe: 'response' }
+            )
+            .pipe(
+                //error handling with the catchError operator
+                catchError(() => {
+                    //throwError creates a new Observable that emits the provided error message
+                    return throwError(
+                        () => 'Something bad happened; please try again later.'
+                    );
+                })
+            );
     }
 }
