@@ -5,6 +5,13 @@
         </a>
         <div class="button-wrapper">
             <a
+                *ngIf="isLoggedIn$ | async"
+                class="button side background"
+                routerLink="/account"
+                routerLinkActive="active-button"
+            >account</a
+            >
+            <a
                 *ngIf="(isLoggedIn$ | async) === false"
                 class="button side background"
                 routerLink="/signup"

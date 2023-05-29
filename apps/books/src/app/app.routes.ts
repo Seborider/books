@@ -5,6 +5,8 @@ import { PageNotFoundComponent } from './components/page-not-found/page-not-foun
 import { HomeComponent } from './components/home/home.component';
 import { SignupSuccessfulComponent } from './components/auth/signup-successful/signup-successful.component';
 import { AuthGuard } from './components/auth/auth-guard';
+import { AccountComponent } from './components/auth/account/account.component';
+import { EditAccountComponent } from './components/auth/edit-account/edit-account.component';
 
 export const appRoutes: Route[] = [
     { path: 'login', component: LoginComponent },
@@ -14,6 +16,16 @@ export const appRoutes: Route[] = [
         path: 'home',
         component: HomeComponent,
         //implement guarded route
+        canActivate: [AuthGuard],
+    },
+    {
+        path: 'account',
+        component: AccountComponent,
+        canActivate: [AuthGuard],
+    },
+    {
+        path: 'editaccount',
+        component: EditAccountComponent,
         canActivate: [AuthGuard],
     },
     { path: '', redirectTo: '', pathMatch: 'full' },

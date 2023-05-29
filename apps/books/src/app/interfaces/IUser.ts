@@ -8,6 +8,7 @@ export interface IUser {
     username: string;
     password: string;
     passwordConfirmation: string;
+    currentUsername: string;
 }
 
 export interface IUsernameAvailableResponse {
