@@ -53,4 +53,15 @@ export class UserService {
                 })
             );
     }
+
+    updateUser(
+        currentUser: IUser | null,
+        updatedUser: IUser
+    ): Observable<IUser> {
+        const url = `${this.apiUrl}/auth/users/update`;
+        return this.http.patch<IUser>(url, {
+            originalUsername: currentUser?.username,
+            ...updatedUser,
+        });
+    }
 }

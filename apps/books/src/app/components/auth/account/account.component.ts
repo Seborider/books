@@ -1,17 +1,18 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { IUser } from '../../interfaces/IUser';
-import { AuthService } from '../../services/auth-service';
+import { IUser } from '../../../interfaces/IUser';
 import { Subscription } from 'rxjs';
+import { AuthService } from '../../../services/auth-service';
+import { RouterLink } from '@angular/router';
 
 @Component({
-    selector: 'books-home',
+    selector: 'books-profile',
     standalone: true,
-    imports: [CommonModule],
-    templateUrl: './home.component.html',
-    styleUrls: ['./home.component.scss'],
+    imports: [CommonModule, RouterLink],
+    templateUrl: './account.component.html',
+    styleUrls: ['./account.component.scss'],
 })
-export class HomeComponent implements OnInit, OnDestroy {
+export class AccountComponent implements OnInit, OnDestroy {
     currentUser: IUser | null = null;
     private currentUserSubscription!: Subscription;
 
@@ -31,7 +32,7 @@ export class HomeComponent implements OnInit, OnDestroy {
         );
     }
 
-    //lifecycle hook that is called just before Angular destroys the directive/component
+    //lifecycle hook that is called just before Angular destroys the component
     ngOnDestroy() {
         //prevent memory leak when component destroyed
         this.currentUserSubscription.unsubscribe();
