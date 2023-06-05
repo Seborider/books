@@ -1,7 +1,10 @@
 <h3>Hello <span class="username">{{currentUser?.user?.username}}</span>, this is your account:</h3>
-<div>Username: {{currentUser?.user?.username}} </div>
-<div>First Name: {{currentUser?.user?.firstName}}</div>
-<div>Last Name: {{currentUser?.user?.lastName}}</div>
-<div>Email: {{currentUser?.user?.email}}</div>
-<div><a routerLink="/editaccount">edit</a></div>
-
+<div class="page-container">
+    <div class="account-container">
+        <div>Username: {{currentUser?.user?.username}} </div>
+        <div>First Name: {{currentUser?.user?.firstName}}</div>
+        <div>Last Name: {{currentUser?.user?.lastName}}</div>
+        <div>Email: {{currentUser?.user?.email}}</div>
+        <div><a routerLink="/editaccount">edit</a></div>
+    </div>
+</div>

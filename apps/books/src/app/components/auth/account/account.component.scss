@@ -1,3 +1,22 @@
 .username {
     color: #ff73f2;
 }
+
+.page-container {
+    max-width: 50em;
+    margin: auto;
+    display: flex;
+    justify-content: center;
+}
+
+.account-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 5px solid black;
+    padding: 3em;
+    margin: 3em;
+    box-shadow: -1em 1em 0.15em transparentize(black, 0.9);
+    min-width: 30em;
+}
