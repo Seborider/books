@@ -1,3 +1,90 @@
 .username {
     color: #ff73f2;
 }
+.page-container {
+    max-width: 50em;
+    margin: auto;
+    display: flex;
+    justify-content: center;
+}
+
+.account-edit-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 5px solid black;
+    padding: 3em;
+    margin: 3em;
+    box-shadow: -1em 1em 0.15em transparentize(black, 0.9);
+    min-width: 30em;
+}
+
+.form-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+
+.label {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.input {
+    max-width: 30em;
+    min-width: 20em;
+    border: 2px solid black;
+    min-height: 3em;
+    padding-left: 1em;
+    transition: all 0.5s ease-in;
+}
+
+.input:focus {
+    outline: none;
+}
+
+.hint-message {
+    font-size: 0.75em;
+}
+
+.error-message {
+    color: red;
+    font-size: 0.75em;
+}
+
+.slow-appear-hint {
+    animation: fadeInHint 10s;
+}
+
+@keyframes fadeInHint {
+    0% {
+        visibility: hidden;
+        opacity: 0;
+    }
+    50% {
+        opacity: 1;
+    }
+    100% {
+        visibility: visible;
+        opacity: 1;
+    }
+}
+
+.slow-appear {
+    animation: fadeIn 1.5s;
+}
+
+@keyframes fadeIn {
+    0% {
+        visibility: hidden;
+        opacity: 0;
+    }
+    100% {
+        visibility: visible;
+        opacity: 1;
+    }
+}
