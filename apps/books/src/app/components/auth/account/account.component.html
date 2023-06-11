@@ -1,10 +1,40 @@
-<h3>Hello <span class="username">{{currentUser?.user?.username}}</span>, this is your account:</h3>
+<h3>
+    Hello <span class="username"> {{ currentUser?.user?.username }}</span
+    >, this is your account:
+</h3>
 <div class="page-container">
     <div class="account-container">
-        <div>Username: {{currentUser?.user?.username}} </div>
-        <div>First Name: {{currentUser?.user?.firstName}}</div>
-        <div>Last Name: {{currentUser?.user?.lastName}}</div>
-        <div>Email: {{currentUser?.user?.email}}</div>
-        <div><a routerLink="/editaccount">edit</a></div>
+        <div class="account-properties">
+            <div class="account-property">
+                <span> Username: </span>
+                <span>
+                    {{ currentUser?.user?.username }}
+                </span>
+            </div>
+            <div class="account-property">
+                <span> First Name: </span>
+                <span>
+                    {{ currentUser?.user?.firstName }}
+                </span>
+            </div>
+            <div class="account-property">
+                <span> Last Name: </span>
+                <span>
+                    {{ currentUser?.user?.firstName }}
+                </span>
+            </div>
+            <div class="account-property">
+                <span> Email: </span>
+                <span>
+                    {{ currentUser?.user?.email }}
+                </span>
+            </div>
+        </div>
+        <button
+            class="button background side slow-appear"
+            routerLink="/editaccount"
+        >
+            <a class="link"> edit</a>
+        </button>
     </div>
 </div>

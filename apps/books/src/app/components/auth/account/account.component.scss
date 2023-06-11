@@ -20,3 +20,20 @@
     box-shadow: -1em 1em 0.15em transparentize(black, 0.9);
     min-width: 30em;
 }
+
+.account-properties{
+margin-bottom: 2em;
+    min-width: 15em;
+
+}
+
+.account-property {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+.link:active {
+    text-decoration: none;
+    color: black;
+}

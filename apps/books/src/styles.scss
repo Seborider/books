@@ -142,7 +142,15 @@ $yellow-purple-gradient: linear-gradient(to top, #ff73f2, #fffc8d);
 .link {
     text-decoration: none;
     color: #ff73f2;
+    cursor: pointer;
 }
+
+.black-link {
+    text-decoration: none;
+    color: $black;
+    cursor: pointer;
+}
+
 .link:active {
     text-decoration: none;
     color: $black;
