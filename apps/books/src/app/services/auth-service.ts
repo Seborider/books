@@ -7,10 +7,10 @@ export class AuthService {
     //holds the current login status of the user. It is initially set to null and can emit true or false values later
     public isLoggedIn$ = new BehaviorSubject<boolean | null>(null);
 
-    // holds the current user information
+    //holds the current user information
     private currentUserSubject: BehaviorSubject<IUser | null>;
 
-    // provides a stream of the current user information
+    //provides a stream of the current user information
     public currentUser: Observable<IUser | null>;
 
     constructor() {

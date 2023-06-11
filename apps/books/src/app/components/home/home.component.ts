@@ -3,11 +3,12 @@ import { CommonModule } from '@angular/common';
 import { IUser } from '../../interfaces/IUser';
 import { AuthService } from '../../services/auth-service';
 import { Subscription } from 'rxjs';
+import { RouterLink } from '@angular/router';
 
 @Component({
     selector: 'books-home',
     standalone: true,
-    imports: [CommonModule],
+    imports: [CommonModule, RouterLink],
     templateUrl: './home.component.html',
     styleUrls: ['./home.component.scss'],
 })
