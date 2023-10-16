@@ -1,3 +1,144 @@
 .username {
     color: #ff73f2;
 }
+
+.home-header {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+}
+
+.add-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 5px solid black;
+    padding: 3em;
+    margin: 3em;
+    box-shadow: -1em 1em 0.15em transparentize(black, 0.9);
+    min-width: 30em;
+}
+
+.add-book-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    align-items: flex-start;
+}
+
+.input {
+    width: 35em;
+    border: 2px solid black;
+    min-height: 3em;
+    padding-left: 1em;
+    transition: all 0.5s ease-in;
+}
+
+.input:focus {
+    outline: none;
+}
+
+.slow-appear {
+    animation: fadeIn 1.5s;
+}
+
+@keyframes fadeIn {
+    0% {
+        visibility: hidden;
+        opacity: 0;
+    }
+    100% {
+        visibility: visible;
+        opacity: 1;
+    }
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+    transition: background-color 9999s ease-in-out 0s;
+    -webkit-box-shadow: 0 0 0 1000px white inset;
+}
+
+.button-wrapper {
+    display: flex;
+    gap: 18em;
+}
+
+.error-message {
+    color: red;
+    font-size: 0.75em;
+}
+
+.hint-message {
+    font-size: 0.75em;
+}
+
+.book-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(12em, 1fr));
+    gap: 1em;
+    max-width: 60em;
+    margin: auto;
+    list-style: none;
+    padding-left: 0;
+}
+
+.book-tile {
+    border: 3px solid black;
+    padding: 0.5em;
+    min-height: 10em;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-shadow: -0.3em 0.3em 0.15em transparentize(black, 0.9);
+}
+
+.book-info {
+    cursor: pointer;
+}
+
+.book-actions {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 8px;
+}
+
+.action-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 8px;
+    outline: none;
+    position: relative;
+}
+
+.action-button::before {
+    content: '';
+    position: absolute;
+    visibility: hidden;
+    opacity: 0;
+    background-color: #333;
+    color: white;
+    padding: 4px 8px;
+    transition: opacity 1s;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    white-space: nowrap;
+}
+
+.action-button:hover::before {
+    visibility: visible;
+    opacity: 1;
+}
+
+.delete-button::before {
+    content: 'Delete this book';
+}
+
+.edit-button::before {
+    content: 'Edit this book';
+}

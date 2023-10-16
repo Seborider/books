@@ -17,7 +17,7 @@ router.post(
         //check if the user exists and throw error if not
         const existingUser = await User.findOne({ username });
         if (!existingUser) {
-            return next(new Error('Invalid credential'));
+            return next(new Error('User not known'));
         }
 
         //check if password is correct and throw error if not

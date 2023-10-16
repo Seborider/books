@@ -20,6 +20,9 @@ export class UserService {
     //take a user object and post it to the /signin endpoint of the API, return an Observable that will emit the HTTP response from the server, which should include a user object
     login(user: IUser): Observable<HttpResponse<IUser>> {
         const url = `${this.apiUrl}/auth/users/signin`;
+        // localStorage.setItem('currentUser', JSON.stringify(user));
+        // this.authService.refreshCurrentUser(); // Refresh the current user in AuthService
+
         //{ observe: 'response' } option tells HttpClient that I want the full HttpResponse not just the body, so I can access the header, which contains the authorization
         return this.http.post<IUser>(url, user, { observe: 'response' });
     }

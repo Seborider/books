@@ -7,6 +7,8 @@ import { SignupSuccessfulComponent } from './components/auth/signup-successful/s
 import { AuthGuard } from './components/auth/auth-guard';
 import { AccountComponent } from './components/auth/account/account.component';
 import { EditAccountComponent } from './components/auth/edit-account/edit-account.component';
+import { BookComponent } from './components/books/book/book.component';
+import { EditBookComponent } from './components/books/edit-book/edit-book.component';
 
 export const appRoutes: Route[] = [
     { path: 'login', component: LoginComponent },
@@ -26,6 +28,16 @@ export const appRoutes: Route[] = [
     {
         path: 'editaccount',
         component: EditAccountComponent,
+        canActivate: [AuthGuard],
+    },
+    {
+        path: 'book/:title',
+        component: BookComponent,
+        canActivate: [AuthGuard],
+    },
+    {
+        path: 'editbook/:title',
+        component: EditBookComponent,
         canActivate: [AuthGuard],
     },
     { path: '', redirectTo: '', pathMatch: 'full' },

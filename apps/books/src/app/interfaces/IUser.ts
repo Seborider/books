@@ -9,9 +9,17 @@ export interface IUser {
     password: string;
     passwordConfirmation: string;
     currentUsername: string;
+    books: IBook[];
 }
 
 export interface IUsernameAvailableResponse {
     available?: boolean;
     exists: boolean;
+}
+
+interface IBook {
+    title: string;
+    author: string;
+    genre: string;
+    id: string;
 }
