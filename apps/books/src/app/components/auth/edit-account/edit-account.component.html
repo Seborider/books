@@ -1,161 +1,168 @@
-<h3>Hello <span class="username">{{currentUser?.user?.username}}</span>, please update your information:</h3>
+<h3>
+    Hello <span class="username">{{ currentUser?.username }}</span
+    >, please update your information:
+</h3>
 <div class="page-container">
     <div class="account-edit-container">
-        <div >
-
-        <form
-            [formGroup]="updateUserForm"
-            (ngSubmit)="submit()"
-            class="form-wrapper"
-        >
-            <div>new Username:
-                <input
-                    type="text"
-                    formControlName="username"
-                    class="input"
+        <div>
+            <form
+                [formGroup]="updateUserForm"
+                (ngSubmit)="submit()"
+                class="form-wrapper"
+            >
+                <div>
+                    new Username:
+                    <input
+                        type="text"
+                        formControlName="username"
+                        class="input"
+                        placeholder="{{ currentUser?.username }}"
+                    />
+                </div>
+                <div
+                    *ngIf="updateUserForm.controls.username?.errors?.['minlength']"
+                    class="hint-message slow-appear"
                 >
-            </div>
-            <div
-                *ngIf="updateUserForm.controls.username?.errors?.['minlength']"
-                class="hint-message slow-appear"
-            >
-                Your Username must have at least 4 characters.
-            </div>
-            <div
-                *ngIf="updateUserForm.controls.username?.errors?.['maxlength']"
-                class="error-message slow-appear"
-            >
-                Your Username should not exceed 20 characters.
-            </div>
-            <div
-                *ngIf="updateUserForm.controls.username?.errors?.['pattern']"
-                class="error-message slow-appear"
-            >
-                Your Username must exist of alphanumeric characters.
-            </div>
-            <!--
-                - existingUser property is checked
-                -->
-            <div
-                class="error-message slow-appear"
-                *ngIf="updateUserForm.controls.username?.errors?.['existingUser']"
-            >
-                This Username is already in use.
-            </div>
-            <div>First Name:
-                <input
-                    placeholder="{{currentUser?.user?.firstName}}"
-                    type="text"
-                    formControlName="firstName"
-                    class="input"
-
-                ></div>
-            <div
-                *ngIf="updateUserForm.controls.firstName?.errors?.['minlength']"
-                class="hint-message slow-appear-hint"
-            >
-                Your First Name must have at least 2 characters.
-            </div>
-            <div
-                *ngIf="updateUserForm.controls.firstName?.errors?.['maxlength']"
-                class="error-message slow-appear"
-            >
-                Your First Name should not exceed 20 characters.
-            </div>
-            <div
-                *ngIf="updateUserForm.controls.firstName?.errors?.['pattern']"
-                class="error-message slow-appear"
-            >
-                Your First Name cannot contain numbers.
-            </div>
-            <div>
-                Last Name:
-                <input
-                    placeholder="{{currentUser?.user?.lastName}}"
-                    type="text"
-                    formControlName="lastName"
-                    class="input"
-
+                    Your Username must have at least 4 characters.
+                </div>
+                <div
+                    *ngIf="updateUserForm.controls.username?.errors?.['maxlength']"
+                    class="error-message slow-appear"
                 >
-            </div>
-            <div
-                *ngIf="updateUserForm.controls.lastName?.errors?.['minlength']"
-                class="hint-message slow-appear-hint"
-            >
-                Your Last Name must have at least 2 characters.
-            </div>
-            <div
-                *ngIf="updateUserForm.controls.lastName?.errors?.['maxlength']"
-                class="error-message slow-appear"
-            >
-                Your Last Name should not exceed 20 characters.
-            </div>
-            <div
-                *ngIf="updateUserForm.controls.lastName?.errors?.['pattern']"
-                class="error-message slow-appear"
-            >
-                Your Last Name cannot contain numbers.
-            </div>
-            <div>Email:
-                <input
-                    placeholder="{{currentUser?.user?.email}}"
-                    type="text"
-                    formControlName="email"
-                    class="input"
-
+                    Your Username should not exceed 20 characters.
+                </div>
+                <div
+                    *ngIf="updateUserForm.controls.username?.errors?.['pattern']"
+                    class="error-message slow-appear"
                 >
-            </div>
-            <div
-                *ngIf="updateUserForm.controls.email?.errors?.['pattern']"
-                class="hint-message slow-appear-hint"
-            >
-                Please provide a correct email address.
-            </div>
-            <div>Password:
-                <input
-                    type="password"
-                    formControlName="password"
-                    class="input"
-
+                    Your Username must exist of alphanumeric characters.
+                </div>
+                <div
+                    class="error-message slow-appear"
+                    *ngIf="updateUserForm.controls.username?.errors?.['existingUser']"
                 >
-            </div>
-            <div>Password Confirmation:
-                <input
-                    type="password"
-                    formControlName="passwordConfirmation"
-                    class="input"
-
+                    This Username is already in use.
+                </div>
+                <div>
+                    First Name:
+                    <input
+                        placeholder="{{ currentUser?.firstName }}"
+                        type="text"
+                        formControlName="firstName"
+                        class="input"
+                    />
+                </div>
+                <div
+                    *ngIf="updateUserForm.controls.firstName?.errors?.['minlength']"
+                    class="hint-message slow-appear-hint"
                 >
-            </div>
-            <div
-                *ngIf="updateUserForm.controls.passwordConfirmation.dirty && updateUserForm.errors?.['passwordsDontMatch']"
-                class="error-message slow-appear"
-            >
-                Password and Password Confirmation must match.
-            </div>
-            <div
-                *ngIf="updateUserForm.controls.password.errors?.['minlength']"
-                class="hint-message slow-appear"
-            >
-                Your Password should have at least 8 characters.
-            </div>
-            <div
-                *ngIf="updateUserForm.controls.password?.errors?.['maxlength']"
-                class="error-message slow-appear"
-            >
-                Your Password should not exceed 16 characters.
-            </div>
-            <div *ngIf="updateUserForm.valid">
-                <button
-                    class="button background side slow-appear"
-                    type="submit"
+                    Your First Name must have at least 2 characters.
+                </div>
+                <div
+                    *ngIf="updateUserForm.controls.firstName?.errors?.['maxlength']"
+                    class="error-message slow-appear"
                 >
-                    Update my account
-                </button>
-            </div>
-        </form>
+                    Your First Name should not exceed 20 characters.
+                </div>
+                <div
+                    *ngIf="updateUserForm.controls.firstName?.errors?.['pattern']"
+                    class="error-message slow-appear"
+                >
+                    Your First Name cannot contain numbers.
+                </div>
+                <div>
+                    Last Name:
+                    <input
+                        placeholder="{{ currentUser?.lastName }}"
+                        type="text"
+                        formControlName="lastName"
+                        class="input"
+                    />
+                </div>
+                <div
+                    *ngIf="updateUserForm.controls.lastName?.errors?.['minlength']"
+                    class="hint-message slow-appear-hint"
+                >
+                    Your Last Name must have at least 2 characters.
+                </div>
+                <div
+                    *ngIf="updateUserForm.controls.lastName?.errors?.['maxlength']"
+                    class="error-message slow-appear"
+                >
+                    Your Last Name should not exceed 20 characters.
+                </div>
+                <div
+                    *ngIf="updateUserForm.controls.lastName?.errors?.['pattern']"
+                    class="error-message slow-appear"
+                >
+                    Your Last Name cannot contain numbers.
+                </div>
+                <div>
+                    Email:
+                    <input
+                        placeholder="{{ currentUser?.email }}"
+                        type="text"
+                        formControlName="email"
+                        class="input"
+                    />
+                </div>
+                <div
+                    *ngIf="updateUserForm.controls.email?.errors?.['pattern']"
+                    class="hint-message slow-appear-hint"
+                >
+                    Please provide a correct email address.
+                </div>
+                <div>
+                    Password:
+                    <input
+                        type="password"
+                        formControlName="password"
+                        class="input"
+                    />
+                </div>
+                <div>
+                    Password Confirmation:
+                    <input
+                        type="password"
+                        formControlName="passwordConfirmation"
+                        class="input"
+                    />
+                </div>
+                <div
+                    *ngIf="updateUserForm.controls.passwordConfirmation.dirty && updateUserForm.errors?.['passwordsDontMatch']"
+                    class="error-message slow-appear"
+                >
+                    Password and Password Confirmation must match.
+                </div>
+                <div
+                    *ngIf="updateUserForm.controls.password.errors?.['minlength']"
+                    class="hint-message slow-appear"
+                >
+                    Your Password should have at least 8 characters.
+                </div>
+                <div
+                    *ngIf="updateUserForm.controls.password?.errors?.['maxlength']"
+                    class="error-message slow-appear"
+                >
+                    Your Password should not exceed 16 characters.
+                </div>
+                <div *ngIf="updateUserForm.valid">
+                    <button
+                        class="button background side slow-appear"
+                        type="submit"
+                    >
+                        Update my account
+                    </button>
+                </div>
+                <div *ngIf="updateUserForm.invalid">
+                    <button
+                        class="button background side slow-appear"
+                        routerLink="/account"
+                    >
+                        Cancel
+                    </button>
+                </div>
+            </form>
         </div>
     </div>
 </div>
-
-

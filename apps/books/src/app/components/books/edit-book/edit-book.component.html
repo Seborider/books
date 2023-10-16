@@ -1,0 +1,99 @@
+<div class="page-container">
+    <div class="book-edit-container">
+            Please enter new book data to edit
+        <form
+            [formGroup]="editBookForm"
+            class="edit-form-wrapper"
+            (ngSubmit)="onEditBook()"
+        >
+            <div class="book-title">
+                "{{ this.title$ | async }}"
+            </div>
+            <div>
+                <input
+                    type="text"
+                    id="title"
+                    name="title"
+                    class="input"
+                    placeholder="Title"
+                    formControlName="newTitle"
+                />
+                <div
+                    *ngIf="editBookForm.controls.newTitle?.errors?.['minlength']"
+                    class="hint-message slow-appear-hint"
+                >
+                    Book title must have at least 2 characters.
+                </div>
+                <div
+                    *ngIf="editBookForm.controls.newTitle?.errors?.['maxlength']"
+                    class="error-message slow-appear"
+                >
+                    Book title should not exceed 50 characters.
+                </div>
+            </div>
+            <div>
+                <input
+                    type="text"
+                    id="author"
+                    name="author"
+                    class="input"
+                    placeholder="Author"
+                    formControlName="newAuthor"
+                />
+                <div
+                    *ngIf="editBookForm.controls.newAuthor?.errors?.['minlength']"
+                    class="hint-message slow-appear-hint"
+                >
+                    Authors name must have at least 2 characters.
+                </div>
+                <div
+                    *ngIf="editBookForm.controls.newAuthor?.errors?.['maxlength']"
+                    class="error-message slow-appear"
+                >
+                    Authors name should not exceed 50 characters.
+                </div>
+            </div>
+            <div>
+                <input
+                    type="text"
+                    id="genre"
+                    name="genre"
+                    class="input"
+                    placeholder="Genre"
+                    formControlName="newGenre"
+                />
+                <div
+                    *ngIf="editBookForm.controls.newGenre?.errors?.['minlength']"
+                    class="hint-message slow-appear-hint"
+                >
+                    Genre must have at least 2 characters.
+                </div>
+                <div
+                    *ngIf="editBookForm.controls.newGenre?.errors?.['maxlength']"
+                    class="error-message slow-appear"
+                >
+                    Genre should not exceed 50 characters.
+                </div>
+            </div>
+            <div class="button-wrapper">
+                <div *ngIf="editBookForm.invalid">
+                    <button
+                        class="button background side slow-appear"
+                        type="button"
+                        routerLink="/home"
+                    >
+                        cancel
+                    </button>
+                </div>
+                <div *ngIf="editBookForm.valid">
+                    <button
+                        class="button background side slow-appear"
+                        type="submit"
+                    >
+                        edit
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

@@ -24,10 +24,11 @@ export class AuthService {
     //get the user from local storage and parse it into JS object, if none is set, return user as null
     private userFromLocalStorage(): IUser | null {
         const currentUserInLocalStorage = localStorage.getItem('currentUser');
-        const user: IUser | null = currentUserInLocalStorage
-            ? JSON.parse(currentUserInLocalStorage)
-            : null;
-        return user;
+        if (currentUserInLocalStorage) {
+            const parsedData = JSON.parse(currentUserInLocalStorage);
+            return parsedData.user ? parsedData.user : null;
+        }
+        return null;
     }
 
     //get the current value of the currentUserSubject
@@ -72,5 +73,10 @@ export class AuthService {
         localStorage.removeItem('currentUser');
         this.currentUserSubject.next(null);
         this.isLoggedIn$.next(false);
+    }
+
+    public refreshCurrentUser() {
+        const user: IUser | null = this.userFromLocalStorage();
+        this.currentUserSubject.next(user);
     }
 }

@@ -7,6 +7,7 @@ import { signinRouter } from './routes/signin';
 import { signupRouter } from './routes/signup';
 import { usernameRouter } from './routes/username';
 import { updateRouter } from './routes/update';
+import { bookRouter } from './routes/books';
 import cors from 'cors';
 
 //loading environment variables
@@ -28,6 +29,7 @@ app.use(signinRouter);
 app.use(signupRouter);
 app.use(usernameRouter);
 app.use(updateRouter);
+app.use(bookRouter);
 
 //catching all other routes and return error if not existing
 app.all('*', async (req: Request, res: Response, next: NextFunction) => {

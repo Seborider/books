@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { IUser } from '../../../interfaces/IUser';
 import { Subscription } from 'rxjs';
 import { AuthService } from '../../../services/auth-service';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import {
     FormControl,
     FormGroup,
@@ -17,7 +17,7 @@ import { ExistingUsername } from '../existing-username';
 @Component({
     selector: 'books-edit-account',
     standalone: true,
-    imports: [CommonModule, ReactiveFormsModule],
+    imports: [CommonModule, ReactiveFormsModule, RouterLink],
     templateUrl: './edit-account.component.html',
     styleUrls: ['./edit-account.component.scss'],
 })
