@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
     FormControl,
@@ -24,12 +24,10 @@ import { ExistingUsername } from '../existing-username';
 //create the class
 export class SignupComponent {
     //inject dependencies as private properties
-    constructor(
-        private signupService: UserService,
-        private router: Router,
-        private passwordMatch: PasswordMatch,
-        private uniqueUser: ExistingUsername
-    ) {}
+    private signupService: UserService = inject(UserService);
+    private router: Router = inject(Router);
+    private passwordMatch: PasswordMatch = inject(PasswordMatch);
+    private uniqueUser: ExistingUsername = inject(ExistingUsername);
 
     //new instance of Angular FormGroup class (represents the form) is initialized
     signupUserForm = new FormGroup(

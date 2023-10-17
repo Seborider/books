@@ -1,11 +1,13 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { Router, UrlTree } from '@angular/router';
 import { AuthService } from '../../services/auth-service';
 import { map, Observable, take } from 'rxjs';
 
 @Injectable()
 export class AuthGuard {
-    constructor(private authService: AuthService, private router: Router) {}
+    authService: AuthService = inject(AuthService);
+    router: Router = inject(Router);
+
     canActivate(): Observable<boolean | UrlTree> {
         //get users logged in status
         return this.authService.isLoggedIn$.pipe(

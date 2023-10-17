@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { LoginComponent } from './components/auth/login/login.component';
 import { SignupComponent } from './components/auth/signup/signup.component';
@@ -16,8 +16,7 @@ import { AuthService } from './services/auth-service';
 export class AppComponent implements OnInit {
     title = 'books';
     isLoggedIn$!: Observable<boolean | null>;
-
-    constructor(public authService: AuthService) {}
+    public authService: AuthService = inject(AuthService);
 
     //ngOnInit is a lifecycle hook method that gets called once after Angular has set up the component
     ngOnInit() {

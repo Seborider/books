@@ -1,7 +1,7 @@
 import { map } from 'rxjs';
 import { UserService } from '../../services/user.service';
 import { AbstractControl, AsyncValidator } from '@angular/forms';
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 
 //decorator, that declares this class as usable in other classes with dependency injection
 @Injectable()
@@ -9,8 +9,7 @@ import { Injectable } from '@angular/core';
 //define class and implement AsyncValidator to call validate
 export class ExistingUsername implements AsyncValidator {
     //inject UserService
-    constructor(private userService: UserService) {}
-
+    private userService: UserService = inject(UserService);
     //call validate method which takes control as an argument with type of AbstractControl
     validate = (control: AbstractControl) => {
         //extract the value (pointing to the username)

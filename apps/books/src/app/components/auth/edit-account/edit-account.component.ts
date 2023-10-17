@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { IUser } from '../../../interfaces/IUser';
 import { Subscription } from 'rxjs';
@@ -25,13 +25,11 @@ export class EditAccountComponent implements OnInit, OnDestroy {
     currentUser: IUser | null = null;
     private currentUserSubscription!: Subscription;
 
-    constructor(
-        private authService: AuthService,
-        private router: Router,
-        private userService: UserService,
-        private passwordMatch: PasswordMatch,
-        private uniqueUser: ExistingUsername
-    ) {}
+    private authService: AuthService = inject(AuthService);
+    private router: Router = inject(Router);
+    private userService: UserService = inject(UserService);
+    private passwordMatch: PasswordMatch = inject(PasswordMatch);
+    private uniqueUser: ExistingUsername = inject(ExistingUsername);
 
     updateUserForm = new FormGroup(
         {
