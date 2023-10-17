@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { IUser } from '../../../interfaces/IUser';
 import { map, Subscription } from 'rxjs';
@@ -25,14 +25,12 @@ export class EditBookComponent implements OnInit, OnDestroy {
     private currentUserSubscription!: Subscription;
     currentUser: IUser | null = null;
 
-    title$ = this.route.paramMap.pipe(map((params) => params.get('title')));
+    private authService: AuthService = inject(AuthService);
+    private router: Router = inject(Router);
+    private route: ActivatedRoute = inject(ActivatedRoute);
+    private bookService: BookService = inject(BookService);
 
-    constructor(
-        private authService: AuthService,
-        private router: Router,
-        private route: ActivatedRoute,
-        private bookService: BookService
-    ) {}
+    title$ = this.route.paramMap.pipe(map((params) => params.get('title')));
 
     editBookForm = new FormGroup({
         newTitle: new FormControl('', [

@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { IUser, IUsernameAvailableResponse } from '../interfaces/IUser';
@@ -8,7 +8,7 @@ import { catchError } from 'rxjs/operators';
 @Injectable()
 export class UserService {
     private apiUrl = 'http://localhost:3000/api';
-    constructor(private http: HttpClient) {}
+    private http: HttpClient = inject(HttpClient);
 
     //take a user object of type IUser, post it to the '/signup' - endpoint and return an Observable of type IUser
     signup(user: IUser): Observable<IUser> {

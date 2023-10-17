@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { IUser } from '../../interfaces/IUser';
 import { AuthService } from '../../services/auth-service';
@@ -36,11 +36,9 @@ export class HomeComponent implements OnInit, OnDestroy {
 
     private currentUserSubscription!: Subscription;
 
-    constructor(
-        private router: Router,
-        private authService: AuthService,
-        private bookService: BookService
-    ) {}
+    private router: Router = inject(Router);
+    private authService: AuthService = inject(AuthService);
+    private bookService: BookService = inject(BookService);
 
     addBookForm = new FormGroup({
         title: new FormControl('', [

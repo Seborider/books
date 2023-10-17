@@ -1,11 +1,11 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { AbstractControl, AsyncValidator } from '@angular/forms';
 import { UserService } from '../../services/user.service';
 import { map } from 'rxjs/operators';
 
 @Injectable()
 export class PasswordCorrect implements AsyncValidator {
-    constructor(private userService: UserService) {}
+    private userService: UserService = inject(UserService);
 
     validate = (control: AbstractControl) => {
         //password and username value is extracted from the control

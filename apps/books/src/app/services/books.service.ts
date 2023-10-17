@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { IBook, IBookEdited, IBookResponse } from '../interfaces/IBook';
 import { map, Observable } from 'rxjs';
@@ -8,8 +8,7 @@ import { map, Observable } from 'rxjs';
 })
 export class BookService {
     private apiUrl = 'http://localhost:3000/api';
-
-    constructor(private http: HttpClient) {}
+    private http: HttpClient = inject(HttpClient);
 
     addBook(newBook: IBook): Observable<IBook> {
         return this.http.post<IBook>(

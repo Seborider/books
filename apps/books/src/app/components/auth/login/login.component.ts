@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
     FormControl,
@@ -24,13 +24,11 @@ import { PasswordCorrect } from '../password-correct';
 export class LoginComponent {
     submitClicked = false;
 
-    constructor(
-        private uniqueUser: ExistingUsername,
-        private userService: UserService,
-        private router: Router,
-        private authService: AuthService,
-        private passwordCorrect: PasswordCorrect
-    ) {}
+    private uniqueUser: ExistingUsername = inject(ExistingUsername);
+    private userService: UserService = inject(UserService);
+    private router: Router = inject(Router);
+    private authService: AuthService = inject(AuthService);
+    private passwordCorrect: PasswordCorrect = inject(PasswordCorrect);
 
     loginUserForm = new FormGroup({
         username: new FormControl('', [], this.uniqueUser.validate),

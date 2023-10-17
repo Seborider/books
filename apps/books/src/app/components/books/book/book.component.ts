@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { BookService } from '../../../services/books.service';
 import { ActivatedRoute } from '@angular/router';
 import { IBook, IBookResponse } from '../../../interfaces/IBook';
@@ -19,11 +19,9 @@ export class BookComponent implements OnInit, OnDestroy {
     private currentUserSubscription!: Subscription;
     currentUser: IUser | null = null;
 
-    constructor(
-        private bookService: BookService,
-        private route: ActivatedRoute,
-        private authService: AuthService
-    ) {}
+    private bookService: BookService = inject(BookService);
+    private route: ActivatedRoute = inject(ActivatedRoute);
+    private authService: AuthService = inject(AuthService);
 
     ngOnInit(): void {
         //subscribe to the currentUser observable from the AuthService, and updates the component's currentUser property when the observable emits new data

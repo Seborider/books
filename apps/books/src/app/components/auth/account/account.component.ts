@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { IUser } from '../../../interfaces/IUser';
 import { Subscription } from 'rxjs';
@@ -15,8 +15,7 @@ import { RouterLink } from '@angular/router';
 export class AccountComponent implements OnInit, OnDestroy {
     currentUser: IUser | null = null;
     private currentUserSubscription!: Subscription;
-
-    constructor(private authService: AuthService) {}
+    private authService: AuthService = inject(AuthService);
 
     ngOnInit() {
         //subscribe to the currentUser observable from the AuthService, and updates the component's currentUser property when the observable emits new data
