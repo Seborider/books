@@ -1,0 +1,25 @@
+.search-box {
+    position: relative;
+    max-width: 30em;
+
+    .search-icon {
+        position: absolute;
+        left: .75em;
+        top: 50%;
+        transform: translateY(-50%);
+        height: 24px;
+        width: 24px;
+    }
+
+    .input {
+        width: 100%;
+        border: 2px solid black;
+        min-height: 3em;
+        padding-left: 3em;
+        transition: all 0.5s ease-in;
+
+        &:focus {
+            outline: none;
+        }
+    }
+}

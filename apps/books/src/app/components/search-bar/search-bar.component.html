@@ -1,0 +1,14 @@
+<div class="search-box">
+    <img class="search-icon"
+        ngSrc="assets/icons/search.svg"
+        alt="search"
+        height="24"
+        width="24"
+    />    <input
+        class="input"
+        type="text"
+        [(ngModel)]="searchTerm"
+        (ngModelChange)="onSearchChange($event)"
+        placeholder="Book, Author or Genre"
+    />
+</div>

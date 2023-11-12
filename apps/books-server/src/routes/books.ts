@@ -3,6 +3,11 @@ import { User } from '../models/user';
 
 const router = express.Router();
 
+router.use((req, res, next) => {
+    console.log('bookRouter received a request:', req.originalUrl);
+    next();
+});
+
 // Add one book
 router.post(
     '/api/users/books/:book',
@@ -34,6 +39,33 @@ router.get('/api/users/books', async (req: Request, res: Response) => {
     } else {
         res.status(404).send('User not found');
     }
+});
+router.get('/api/users/books/search', async (req: Request, res: Response) => {
+    const { username, searchTerm } = req.query;
+
+    if (!searchTerm) {
+        return res.status(400).send('Search term is required');
+    }
+
+    const existingUser = await User.findOne({ username });
+    if (!existingUser) {
+        return res.status(404).send('User not found');
+    }
+
+    const regex = new RegExp(searchTerm.toString(), 'i');
+
+    console.log('Regex: ', regex);
+
+    const filteredBooks = existingUser.books.filter(
+        (book) =>
+            regex.test(book.title) ||
+            regex.test(book.author) ||
+            regex.test(book.genre)
+    );
+
+    console.log('Filtered Books: ', filteredBooks);
+
+    res.status(200).send({ books: filteredBooks });
 });
 
 // Delete a book by title

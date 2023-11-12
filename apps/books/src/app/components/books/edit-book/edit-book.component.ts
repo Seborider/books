@@ -21,7 +21,7 @@ import { BookService } from '../../../services/books.service';
     styleUrls: ['./edit-book.component.scss'],
 })
 export class EditBookComponent implements OnInit, OnDestroy {
-    book!: IBook[];
+    book!: IBook;
     private currentUserSubscription!: Subscription;
     currentUser: IUser | null = null;
 
@@ -31,6 +31,7 @@ export class EditBookComponent implements OnInit, OnDestroy {
     private bookService: BookService = inject(BookService);
 
     title$ = this.route.paramMap.pipe(map((params) => params.get('title')));
+    title = this.route.snapshot.paramMap.get('title');
 
     editBookForm = new FormGroup({
         newTitle: new FormControl('', [
@@ -54,6 +55,7 @@ export class EditBookComponent implements OnInit, OnDestroy {
             (data) => {
                 if (data !== null) {
                     this.currentUser = data;
+                    this.findBookByTitle();
                 } else {
                     this.currentUser = null;
                 }
@@ -67,7 +69,7 @@ export class EditBookComponent implements OnInit, OnDestroy {
 
     onEditBook() {
         if (this.editBookForm.valid) {
-            const title = this.route.snapshot.paramMap.get('title');
+            const title = this.title;
             if (!title) {
                 console.error('Title not provided');
                 return;
@@ -89,6 +91,21 @@ export class EditBookComponent implements OnInit, OnDestroy {
                         },
                     });
             }
+        }
+    }
+
+    findBookByTitle() {
+        const title = this.title;
+        if (!title || !this.currentUser) {
+            return;
+        }
+        const book = this.currentUser.books.find(
+            (book) => book.title === title
+        );
+        if (book) {
+            this.editBookForm.get('newTitle')?.setValue(book.title);
+            this.editBookForm.get('newAuthor')?.setValue(book.author);
+            this.editBookForm.get('newGenre')?.setValue(book.genre);
         }
     }
 }

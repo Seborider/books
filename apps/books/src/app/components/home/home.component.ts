@@ -13,6 +13,8 @@ import {
 } from '@angular/forms';
 import { IBook } from '../../interfaces/IBook';
 import { BookService } from '../../services/books.service';
+import { PopupComponent } from '../popup/popup.component';
+import { SearchBarComponent } from '../search-bar/search-bar.component';
 
 @Component({
     selector: 'books-home',
@@ -23,6 +25,8 @@ import { BookService } from '../../services/books.service';
         FormsModule,
         ReactiveFormsModule,
         NgOptimizedImage,
+        PopupComponent,
+        SearchBarComponent,
     ],
     templateUrl: './home.component.html',
     styleUrls: ['./home.component.scss'],
@@ -30,9 +34,12 @@ import { BookService } from '../../services/books.service';
 export class HomeComponent implements OnInit, OnDestroy {
     currentUser: IUser | null = null;
     showForm = false;
+    showPopup = false;
+    searchPerformed = false;
     author: string | undefined;
-    title: string | undefined;
+    title!: string;
     books: IBook[] = [];
+    currentBookTitle!: string;
 
     private currentUserSubscription!: Subscription;
 
@@ -124,6 +131,7 @@ export class HomeComponent implements OnInit, OnDestroy {
                     this.books = this.books.filter(
                         (book) => book.title !== title
                     );
+                    this.togglePopup();
                 },
                 error: (error) => {
                     console.error('Error deleting book:', error);
@@ -137,5 +145,17 @@ export class HomeComponent implements OnInit, OnDestroy {
 
     navigateToEditBook(title: string): void {
         this.router.navigate(['/editbook', title]);
+    }
+
+    togglePopup(title?: string): void {
+        if (title) {
+            this.currentBookTitle = title;
+        }
+        this.showPopup = !this.showPopup;
+    }
+
+    handleSearch(books: IBook[]): void {
+        this.searchPerformed = true;
+        this.books = books; // Update your books list with the search results
     }
 }

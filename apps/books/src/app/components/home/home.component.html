@@ -1,102 +1,107 @@
 <div class="home-header">
     <div>
-        <button
-            class="button background side slow-appear"
-            type="submit"
-            (click)="toggleAddForm()"
-        >
-            add a book
-        </button>
-    </div>
+        <div class="add-search-wrapper">
+            <button
+                class="button background side slow-appear"
+                type="submit"
+                (click)="toggleAddForm()"
+            >
+                add a book
+            </button>
+            <books-search-bar
+                (searchResults)="handleSearch($event)"
+            ></books-search-bar>
+        </div>
 
-    <div *ngIf="showForm" class="add-container slow-appear">
-        <form
-            [formGroup]="addBookForm"
-            (ngSubmit)="addBook()"
-            class="add-book-wrapper"
-        >
-            <div>
-                <input
-                    type="text"
-                    id="title"
-                    name="title"
-                    class="input"
-                    placeholder="title"
-                    formControlName="title"
-                />
-                <div
-                    *ngIf="addBookForm.controls.title?.errors?.['minlength']"
-                    class="hint-message slow-appear-hint"
-                >
-                    Book title must have at least 2 characters.
+        <div *ngIf="showForm" class="add-container slow-appear">
+            <form
+                [formGroup]="addBookForm"
+                (ngSubmit)="addBook()"
+                class="add-book-wrapper"
+            >
+                <div>
+                    <input
+                        type="text"
+                        id="title"
+                        name="title"
+                        class="input"
+                        placeholder="title"
+                        formControlName="title"
+                    />
+                    <div
+                        *ngIf="addBookForm.controls.title?.errors?.['minlength']"
+                        class="hint-message slow-appear-hint"
+                    >
+                        Book title must have at least 2 characters.
+                    </div>
+                    <div
+                        *ngIf="addBookForm.controls.title?.errors?.['maxlength']"
+                        class="error-message slow-appear"
+                    >
+                        Book title should not exceed 50 characters.
+                    </div>
                 </div>
-                <div
-                    *ngIf="addBookForm.controls.title?.errors?.['maxlength']"
-                    class="error-message slow-appear"
-                >
-                    Book title should not exceed 50 characters.
+                <div>
+                    <input
+                        type="text"
+                        id="author"
+                        name="author"
+                        class="input"
+                        placeholder="author"
+                        formControlName="author"
+                    />
+                    <div
+                        *ngIf="addBookForm.controls.author?.errors?.['minlength']"
+                        class="hint-message slow-appear-hint"
+                    >
+                        Authors name must have at least 2 characters.
+                    </div>
+                    <div
+                        *ngIf="addBookForm.controls.author?.errors?.['maxlength']"
+                        class="error-message slow-appear"
+                    >
+                        Authors name should not exceed 50 characters.
+                    </div>
                 </div>
-            </div>
-            <div>
-                <input
-                    type="text"
-                    id="author"
-                    name="author"
-                    class="input"
-                    placeholder="author"
-                    formControlName="author"
-                />
-                <div
-                    *ngIf="addBookForm.controls.author?.errors?.['minlength']"
-                    class="hint-message slow-appear-hint"
-                >
-                    Authors name must have at least 2 characters.
+                <div>
+                    <input
+                        type="text"
+                        id="genre"
+                        name="genre"
+                        class="input"
+                        placeholder="genre"
+                        formControlName="genre"
+                    />
+                    <div
+                        *ngIf="addBookForm.controls.genre?.errors?.['minlength']"
+                        class="hint-message slow-appear-hint"
+                    >
+                        Genre must have at least 2 characters.
+                    </div>
+                    <div
+                        *ngIf="addBookForm.controls.genre?.errors?.['maxlength']"
+                        class="error-message slow-appear"
+                    >
+                        Genre should not exceed 50 characters.
+                    </div>
                 </div>
-                <div
-                    *ngIf="addBookForm.controls.author?.errors?.['maxlength']"
-                    class="error-message slow-appear"
-                >
-                    Authors name should not exceed 50 characters.
+                <div class="button-wrapper">
+                    <button
+                        class="button background side slow-appear"
+                        type="button"
+                        (click)="toggleAddForm()"
+                    >
+                        cancel
+                    </button>
+                    <button
+                        class="button background side slow-appear"
+                        type="submit"
+                    >
+                        add
+                    </button>
                 </div>
-            </div>
-            <div>
-                <input
-                    type="text"
-                    id="genre"
-                    name="genre"
-                    class="input"
-                    placeholder="genre"
-                    formControlName="genre"
-                />
-                <div
-                    *ngIf="addBookForm.controls.genre?.errors?.['minlength']"
-                    class="hint-message slow-appear-hint"
-                >
-                    Genre must have at least 2 characters.
-                </div>
-                <div
-                    *ngIf="addBookForm.controls.genre?.errors?.['maxlength']"
-                    class="error-message slow-appear"
-                >
-                    Genre should not exceed 50 characters.
-                </div>
-            </div>
-            <div class="button-wrapper">
-                <button
-                    class="button background side slow-appear"
-                    type="button"
-                    (click)="toggleAddForm()"
-                >
-                    cancel
-                </button>
-                <button
-                    class="button background side slow-appear"
-                    type="submit"
-                >
-                    add
-                </button>
-            </div>
-        </form>
+            </form>
+        </div>
     </div>
 
     <h3>
@@ -107,20 +112,74 @@
         >, these are your books:
     </h3>
 </div>
-<ul class="book-grid">
+
+<ul class="book-grid" *ngIf="books.length > 0; else noResultsTemplate">
     <li *ngFor="let book of books" class="book-tile">
         <div class="book-info" (click)="navigateToBook(book.title)">
             <div class="book-title">{{ book.title }}</div>
             <div class="book-author">by {{ book.author }}</div>
         </div>
         <div class="book-actions">
-            <button class="action-button delete-button" (click)="deleteBook(book.title)">
-                <img ngSrc="assets/icons/delete.svg" alt="Delete" height="24" width="24">
+            <button
+                class="action-button delete-button"
+                (click)="togglePopup(book.title)"
+            >
+                <span
+                    class="action-button-tooltip"
+                    data-tooltip="Delete this book"
+                ></span>
+                <img
+                    ngSrc="assets/icons/delete.svg"
+                    alt="Delete"
+                    height="24"
+                    width="24"
+                />
             </button>
-            <button class="action-button edit-button" (click)="navigateToEditBook(book.title)">
-                <img ngSrc="assets/icons/edit.svg" alt="Pencil" height="24" width="24">
+            <button
+                class="action-button edit-button"
+                (click)="navigateToEditBook(book.title)"
+            >
+                <span
+                    class="action-button-tooltip"
+                    data-tooltip="Edit this book"
+                ></span>
+
+                <img
+                    ngSrc="assets/icons/edit.svg"
+                    alt="Pencil"
+                    height="24"
+                    width="24"
+                />
             </button>
         </div>
     </li>
 </ul>
 
+<ng-template #noResultsTemplate>
+    <div *ngIf="searchPerformed" class="no-results">No results found.</div>
+</ng-template>
+<div class="overlay" *ngIf="showPopup"></div>
+<books-popup *ngIf="showPopup" text="Are you sure?" class="popup">
+    <div class="popup-button-wrapper">
+        <button class="action-button" (click)="togglePopup(currentBookTitle)">
+            <span class="action-button-tooltip" data-tooltip="No">
+                <img
+                    ngSrc="assets/icons/cancel.svg"
+                    alt="Cancel"
+                    height="24"
+                    width="24"
+                />
+            </span>
+        </button>
+        <button class="action-button" (click)="deleteBook(currentBookTitle)">
+            <span class="action-button-tooltip" data-tooltip="Yes">
+                <img
+                    ngSrc="assets/icons/check.svg"
+                    alt="Pencil"
+                    height="24"
+                    width="24"
+                />
+            </span>
+        </button>
+    </div>
+</books-popup>
