@@ -50,8 +50,6 @@ const bookSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
-
-    // Add other book-related fields here.
 });
 
 //create the user schema by calling the mongoose.Schema constructor

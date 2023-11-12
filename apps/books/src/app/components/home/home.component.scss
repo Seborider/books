@@ -6,6 +6,14 @@
     display: flex;
     flex-direction: column;
     gap: 1em;
+    padding: 1em 4em 0;
+}
+
+.add-search-wrapper {
+    display: flex;
+    flex-direction: row;
+    gap: 1em;
+    justify-content: space-between;
 }
 
 .add-container {
@@ -106,6 +114,7 @@ input:-webkit-autofill:active {
     margin-top: 8px;
 }
 
+/* Base class for action buttons */
 .action-button {
     background: none;
     border: none;
@@ -115,8 +124,9 @@ input:-webkit-autofill:active {
     position: relative;
 }
 
-.action-button::before {
-    content: '';
+/* Base class for tooltip */
+.action-button-tooltip::before {
+    content: attr(data-tooltip); /* Use a data attribute for dynamic content */
     position: absolute;
     visibility: hidden;
     opacity: 0;
@@ -130,15 +140,61 @@ input:-webkit-autofill:active {
     white-space: nowrap;
 }
 
-.action-button:hover::before {
+/* Show the tooltip when hovering over the button */
+.action-button:hover .action-button-tooltip::before {
     visibility: visible;
     opacity: 1;
 }
 
-.delete-button::before {
+/* Specific classes for each button */
+.delete-button .action-button-tooltip::before {
     content: 'Delete this book';
 }
 
-.edit-button::before {
+.edit-button .action-button-tooltip::before {
     content: 'Edit this book';
+}
+
+.cancel-button .action-button-tooltip::before {
+    content: 'No';
+}
+
+.check-button .action-button-tooltip::before {
+    content: 'Yes';
+}
+
+.popup {
+    width: 200px;
+    height: 100px;
+    background-color: white;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1000;
+    border: 1px solid black;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.popup-button-wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    margin-top: 1em;
+}
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(0);
+    z-index: 999;
 }

@@ -46,4 +46,11 @@ export class BookService {
             editedBook
         );
     }
+    searchBooks(username: string, searchTerm: string): Observable<IBook[]> {
+        return this.http
+            .get<{ books: IBook[] }>(`${this.apiUrl}/users/books/search`, {
+                params: { username, searchTerm },
+            })
+            .pipe(map((response) => response.books));
+    }
 }
