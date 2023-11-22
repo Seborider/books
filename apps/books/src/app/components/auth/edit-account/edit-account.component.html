@@ -1,5 +1,5 @@
 <h3>
-    Hello <span class="username">{{ currentUser?.username }}</span
+    Hello <span class="username">{{ currentUser?.user?.username }}</span
     >, please update your information:
 </h3>
 <div class="page-container">
@@ -16,7 +16,7 @@
                         type="text"
                         formControlName="username"
                         class="input"
-                        placeholder="{{ currentUser?.username }}"
+                        placeholder="{{ currentUser?.user?.username }}"
                     />
                 </div>
                 <div
@@ -46,7 +46,7 @@
                 <div>
                     First Name:
                     <input
-                        placeholder="{{ currentUser?.firstName }}"
+                        placeholder="{{ currentUser?.user?.firstName }}"
                         type="text"
                         formControlName="firstName"
                         class="input"
@@ -73,7 +73,7 @@
                 <div>
                     Last Name:
                     <input
-                        placeholder="{{ currentUser?.lastName }}"
+                        placeholder="{{ currentUser?.user?.lastName }}"
                         type="text"
                         formControlName="lastName"
                         class="input"
@@ -100,7 +100,7 @@
                 <div>
                     Email:
                     <input
-                        placeholder="{{ currentUser?.email }}"
+                        placeholder="{{ currentUser?.user?.email }}"
                         type="text"
                         formControlName="email"
                         class="input"

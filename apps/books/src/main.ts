@@ -9,7 +9,6 @@ import { provideHttpClient } from '@angular/common/http';
 import { UserService } from './app/services/user.service';
 import { PasswordMatch } from './app/components/auth/password-match';
 import { ExistingUsername } from './app/components/auth/existing-username';
-import { AuthGuard } from './app/components/auth/auth-guard';
 import { AuthService } from './app/services/auth-service';
 import { PasswordCorrect } from './app/components/auth/password-correct';
 
@@ -20,7 +19,6 @@ bootstrapApplication(AppComponent, {
         UserService,
         PasswordMatch,
         ExistingUsername,
-        AuthGuard,
         AuthService,
         PasswordCorrect,
     ],

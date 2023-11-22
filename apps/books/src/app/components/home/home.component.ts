@@ -15,6 +15,7 @@ import { IBook } from '../../interfaces/IBook';
 import { BookService } from '../../services/books.service';
 import { PopupComponent } from '../popup/popup.component';
 import { SearchBarComponent } from '../search-bar/search-bar.component';
+import { response } from 'express';
 
 @Component({
     selector: 'books-home',
@@ -78,14 +79,16 @@ export class HomeComponent implements OnInit, OnDestroy {
             }
         );
 
-        this.bookService.getBooks(this.currentUser?.username || '').subscribe(
-            (response: IBook[]) => {
-                this.books = response;
-            },
-            (error) => {
-                console.error('Error fetching books:', error);
-            }
-        );
+        this.bookService
+            .getBooks(this.currentUser?.user?.username || '')
+            .subscribe({
+                next: (response: IBook[]) => {
+                    this.books = response;
+                },
+                error: (error) => {
+                    console.error('Error fetching books:', error);
+                },
+            });
     }
 
     //lifecycle hook that is called just before Angular destroys the directive/component
@@ -104,7 +107,7 @@ export class HomeComponent implements OnInit, OnDestroy {
                 title: this.addBookForm.get('title')?.value as string,
                 author: this.addBookForm.get('author')?.value as string,
                 genre: this.addBookForm.get('genre')?.value as string,
-                username: this.currentUser?.username,
+                username: this.currentUser?.user?.username,
             };
 
             // Use the addBook method from BookService
@@ -125,7 +128,7 @@ export class HomeComponent implements OnInit, OnDestroy {
 
     deleteBook(title: string): void {
         this.bookService
-            .deleteBook(this.currentUser?.username || '', title)
+            .deleteBook(this.currentUser?.user?.username || '', title)
             .subscribe({
                 next: () => {
                     this.books = this.books.filter(
@@ -156,6 +159,15 @@ export class HomeComponent implements OnInit, OnDestroy {
 
     handleSearch(books: IBook[]): void {
         this.searchPerformed = true;
-        this.books = books; // Update your books list with the search results
+        this.books = books;
+    }
+
+    onPopupClose(): void {
+        this.togglePopup();
+    }
+
+    onPopupConfirm(): void {
+        this.deleteBook(this.currentBookTitle);
+        this.togglePopup();
     }
 }

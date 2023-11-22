@@ -1,4 +1,10 @@
-import { Component, Input } from '@angular/core';
+import {
+    Component,
+    EventEmitter,
+    HostListener,
+    Input,
+    Output,
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -10,4 +16,17 @@ import { CommonModule } from '@angular/common';
 })
 export class PopupComponent {
     @Input() text!: string;
+
+    @Output() closePopup = new EventEmitter<void>();
+    @Output() confirmPopup = new EventEmitter<void>();
+
+    @HostListener('document:keydown.escape', ['$event'])
+    onKeydownHandler(event: KeyboardEvent) {
+        this.closePopup.emit();
+    }
+
+    @HostListener('document:keydown.enter', ['$event'])
+    onKeydownEnter(event: KeyboardEvent) {
+        this.confirmPopup.emit();
+    }
 }

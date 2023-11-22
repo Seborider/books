@@ -1,5 +1,5 @@
 <h3>
-    Hello <span class="username"> {{ currentUser?.username }}</span
+    Hello <span class="username"> {{ currentUser?.user?.username }}</span
     >, this is your account:
 </h3>
 <div class="page-container">
@@ -8,25 +8,25 @@
             <div class="account-property">
                 <span> Username: </span>
                 <span>
-                    {{ currentUser?.username }}
+                    {{ currentUser?.user?.username }}
                 </span>
             </div>
             <div class="account-property">
                 <span> First Name: </span>
                 <span>
-                    {{ currentUser?.firstName }}
+                    {{ currentUser?.user?.firstName }}
                 </span>
             </div>
             <div class="account-property">
                 <span> Last Name: </span>
                 <span>
-                    {{ currentUser?.firstName }}
+                    {{ currentUser?.user?.firstName }}
                 </span>
             </div>
             <div class="account-property">
                 <span> Email: </span>
                 <span>
-                    {{ currentUser?.email }}
+                    {{ currentUser?.user?.email }}
                 </span>
             </div>
         </div>

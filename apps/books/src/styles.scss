@@ -12,6 +12,11 @@ $white: rgb(255, 255, 255);
 $grey: rgb(220,220,220);
 $yellow-purple-gradient: linear-gradient(to top, #ff73f2, #fffc8d);
 
+h1 {
+    font-size: 2.5em;
+    margin: 0;
+}
+
 .container {
   display: flex;
   align-content: center;
