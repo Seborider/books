@@ -1,26 +1,19 @@
-import { inject, Injectable } from '@angular/core';
-import { Router, UrlTree } from '@angular/router';
+import { CanActivateFn, Router, UrlTree } from '@angular/router';
 import { AuthService } from '../../services/auth-service';
 import { map, Observable, take } from 'rxjs';
+import { inject } from '@angular/core';
 
-@Injectable()
-export class AuthGuard {
-    authService: AuthService = inject(AuthService);
-    router: Router = inject(Router);
+export const canActivateAuthGuard: CanActivateFn = (): Observable<
+    boolean | UrlTree
+> => {
+    const authService = inject(AuthService);
+    const router = inject(Router);
 
-    canActivate(): Observable<boolean | UrlTree> {
-        //get users logged in status
-        return this.authService.isLoggedIn$.pipe(
-            //take the first emitted value
-            take(1),
-            //if the user is not logged navigate to the /login route, and return false to deny access to the guarded route
-            map((isLoggedIn): boolean | UrlTree => {
-                if (!isLoggedIn) {
-                    return this.router.parseUrl('/login'); // Return UrlTree
-                }
-                //if the user is logged in, return true to allow access to the guarded route
-                return true;
-            })
-        );
-    }
-}
+    console.log('in canActivateAuthGuard');
+    return authService.isLoggedIn$.pipe(
+        take(1),
+        map((isLoggedIn): boolean | UrlTree => {
+            return isLoggedIn ? true : router.parseUrl('/login');
+        })
+    );
+};

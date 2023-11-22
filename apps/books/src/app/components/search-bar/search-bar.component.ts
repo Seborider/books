@@ -36,6 +36,8 @@ export class SearchBarComponent implements OnInit, OnDestroy {
     private bookService: BookService = inject(BookService);
     private authService: AuthService = inject(AuthService);
 
+    useOpenLibrary = false;
+
     ngOnInit() {
         this.currentUserSubscription = this.authService.currentUser.subscribe(
             (data) => {
@@ -64,21 +66,37 @@ export class SearchBarComponent implements OnInit, OnDestroy {
 
     private onSearch(term: string): void {
         if (term) {
-            this.bookService
-                .searchBooks(this.currentUser?.username as string, term)
-                .subscribe({
+            if (this.useOpenLibrary) {
+                this.bookService.searchBooksOpenLibrary(term).subscribe({
                     next: (books: IBook[]) => this.searchResults.emit(books),
                     error: (err) =>
                         console.error('Error fetching search results:', err),
                 });
+            } else {
+                this.bookService
+                    .searchBooks(
+                        this.currentUser?.user?.username as string,
+                        term
+                    )
+                    .subscribe({
+                        next: (books: IBook[]) =>
+                            this.searchResults.emit(books),
+                        error: (err) =>
+                            console.error(
+                                'Error fetching search results:',
+                                err
+                            ),
+                    });
+            }
         } else {
+            // Fetch all books if the search term is empty
             this.fetchAllBooks();
         }
     }
 
     private fetchAllBooks(): void {
         this.bookService
-            .getBooks(this.currentUser?.username as string)
+            .getBooks(this.currentUser?.user?.username as string)
             .subscribe({
                 next: (books: IBook[]) => this.searchResults.emit(books),
                 error: (err) => console.error('Error fetching books:', err),

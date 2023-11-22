@@ -1,25 +1,101 @@
 .search-box {
     position: relative;
     max-width: 30em;
+    display: flex;
+
+    &:before,
+    &:after {
+        content: '';
+        position: absolute;
+        background: black; // Adjust color to match your design
+        border: black 5px solid;
+
+    }
+
+    &:before {
+        left: -0.64em;
+        top: 0.35em;
+        height: 41%;
+        transform: skewY(-45deg);
+
+    }
+
+    &:after {
+        bottom: 1.95em;
+        right: -2.42em;
+        width: 116%;
+        height: 1%;
+        transform: skewX(-45deg);
+    }
+
 
     .search-icon {
         position: absolute;
         left: .75em;
-        top: 50%;
+        top: 25%;
         transform: translateY(-50%);
         height: 24px;
         width: 24px;
+        z-index: 1;
+
+
     }
 
-    .input {
-        width: 100%;
-        border: 2px solid black;
-        min-height: 3em;
-        padding-left: 3em;
-        transition: all 0.5s ease-in;
+    .wrraap{
+        display: flex;
+        flex-direction: column;
 
-        &:focus {
-            outline: none;
+        .input {
+            width: 100%;
+            border: 2px solid black;
+            min-height: 3em;
+            padding-left: 3em;
+            transition: all 0.5s ease-in;
+            //box-shadow: -13px 13px 0px -3px black;
+            position: relative;
+
+            &:focus {
+                outline: none;
+            }
+
+
+
+        }
+
+        .labeli {
+            margin-top: 1em;
+            display: flex;
+            align-items: center;
+            margin-left: -0.8em;
+
         }
     }
+
+    input[type='checkbox'] {
+        appearance: none;
+        margin-left: 1em;
+        width: 1.5em;
+        height: 1.5em;
+        border: 0.15em solid;
+        transform: translateY(-0.075em);
+        display: grid;
+        place-content: center;
+    }
+
+    input[type='checkbox']::before {
+        content: '';
+        width: 1em;
+        height: 1em;
+        clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);
+        transform: scale(0);
+        transform-origin: bottom left;
+        transition: 100ms transform ease-in-out;
+        box-shadow: inset 1em 1em #ff73f2;
+        background-color: black;
+    }
+
+    input[type='checkbox']:checked::before {
+        transform: scale(1);
+    }
+
 }

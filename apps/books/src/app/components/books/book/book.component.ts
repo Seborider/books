@@ -40,7 +40,7 @@ export class BookComponent implements OnInit, OnDestroy {
 
         if (title) {
             this.bookService
-                .getBookByTitle(title, this.currentUser?.username || '')
+                .getBookByTitle(title, this.currentUser?.user?.username || '')
                 .subscribe({
                     next: (bookResponse: IBookResponse) => {
                         this.book = bookResponse.book;

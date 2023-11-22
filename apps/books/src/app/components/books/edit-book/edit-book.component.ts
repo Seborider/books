@@ -77,11 +77,15 @@ export class EditBookComponent implements OnInit, OnDestroy {
             const { newTitle, newAuthor, newGenre } = this.editBookForm.value;
             if (this.currentUser && newTitle && newAuthor && newGenre) {
                 this.bookService
-                    .editBook(this.currentUser.username, title, {
-                        newTitle,
-                        newAuthor,
-                        newGenre,
-                    })
+                    .editBook(
+                        this.currentUser?.user?.username as string,
+                        title,
+                        {
+                            newTitle,
+                            newAuthor,
+                            newGenre,
+                        }
+                    )
                     .subscribe({
                         next: () => {
                             this.router.navigateByUrl('/home');
@@ -99,7 +103,7 @@ export class EditBookComponent implements OnInit, OnDestroy {
         if (!title || !this.currentUser) {
             return;
         }
-        const book = this.currentUser.books.find(
+        const book = this.currentUser?.user?.books.find(
             (book) => book.title === title
         );
         if (book) {

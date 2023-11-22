@@ -4,11 +4,19 @@
         alt="search"
         height="24"
         width="24"
-    />    <input
+    />
+    <div class="wrraap">
+    <input
         class="input"
         type="text"
         [(ngModel)]="searchTerm"
         (ngModelChange)="onSearchChange($event)"
         placeholder="Book, Author or Genre"
     />
+    <label class="labeli">
+        <input type="checkbox" [(ngModel)]="useOpenLibrary" />
+        Search the web
+    </label>
+    </div>
+
 </div>

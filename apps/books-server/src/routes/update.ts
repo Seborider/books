@@ -18,6 +18,8 @@ router.patch('/api/auth/users/update', async (req: Request, res: Response) => {
             passwordConfirmation,
         } = req.body;
 
+        console.log(originalUsername);
+
         const user = await User.findOne({ username: originalUsername });
         if (!user) {
             return res.status(404).send({ message: 'User not found' });

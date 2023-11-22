@@ -4,7 +4,7 @@ import { SignupComponent } from './components/auth/signup/signup.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { HomeComponent } from './components/home/home.component';
 import { SignupSuccessfulComponent } from './components/auth/signup-successful/signup-successful.component';
-import { AuthGuard } from './components/auth/auth-guard';
+import { canActivateAuthGuard } from './components/auth/auth-guard';
 import { AccountComponent } from './components/auth/account/account.component';
 import { EditAccountComponent } from './components/auth/edit-account/edit-account.component';
 import { BookComponent } from './components/books/book/book.component';
@@ -18,27 +18,27 @@ export const appRoutes: Route[] = [
         path: 'home',
         component: HomeComponent,
         //implement guarded route
-        canActivate: [AuthGuard],
+        canActivate: [canActivateAuthGuard],
     },
     {
         path: 'account',
         component: AccountComponent,
-        canActivate: [AuthGuard],
+        canActivate: [canActivateAuthGuard],
     },
     {
         path: 'editaccount',
         component: EditAccountComponent,
-        canActivate: [AuthGuard],
+        canActivate: [canActivateAuthGuard],
     },
     {
         path: 'book/:title',
         component: BookComponent,
-        canActivate: [AuthGuard],
+        canActivate: [canActivateAuthGuard],
     },
     {
         path: 'editbook/:title',
         component: EditBookComponent,
-        canActivate: [AuthGuard],
+        canActivate: [canActivateAuthGuard],
     },
     { path: '', redirectTo: '', pathMatch: 'full' },
     { path: '**', component: PageNotFoundComponent },

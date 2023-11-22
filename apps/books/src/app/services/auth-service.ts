@@ -25,8 +25,7 @@ export class AuthService {
     private userFromLocalStorage(): IUser | null {
         const currentUserInLocalStorage = localStorage.getItem('currentUser');
         if (currentUserInLocalStorage) {
-            const parsedData = JSON.parse(currentUserInLocalStorage);
-            return parsedData.user ? parsedData.user : null;
+            return JSON.parse(currentUserInLocalStorage);
         }
         return null;
     }
@@ -58,12 +57,14 @@ export class AuthService {
         this.isLoggedIn$.next(this.isUserLoggedIn());
     }
 
-    //check values of currentUser and comares to current time and returns boolean
+    //check values of currentUser and compares to current time and returns boolean
     private isUserLoggedIn(): boolean {
         const user = this.currentUserValue;
         if (user && user.expires_at) {
-            const expiresAt = JSON.parse(user.expires_at);
-            return new Date().getTime() < expiresAt;
+            const expiresAt = parseInt(user.expires_at);
+            if (!isNaN(expiresAt)) {
+                return new Date().getTime() < expiresAt;
+            }
         }
         return false;
     }

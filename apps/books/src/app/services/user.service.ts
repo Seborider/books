@@ -3,12 +3,14 @@ import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { IUser, IUsernameAvailableResponse } from '../interfaces/IUser';
 import { catchError } from 'rxjs/operators';
+import { AuthService } from './auth-service';
 
 //decorator, that declares this class as usable in other classes with dependency injection
 @Injectable()
 export class UserService {
     private apiUrl = 'http://localhost:3000/api';
     private http: HttpClient = inject(HttpClient);
+    private authService: AuthService = inject(AuthService);
 
     //take a user object of type IUser, post it to the '/signup' - endpoint and return an Observable of type IUser
     signup(user: IUser): Observable<IUser> {
@@ -20,8 +22,8 @@ export class UserService {
     //take a user object and post it to the /signin endpoint of the API, return an Observable that will emit the HTTP response from the server, which should include a user object
     login(user: IUser): Observable<HttpResponse<IUser>> {
         const url = `${this.apiUrl}/auth/users/signin`;
-        // localStorage.setItem('currentUser', JSON.stringify(user));
-        // this.authService.refreshCurrentUser(); // Refresh the current user in AuthService
+        localStorage.setItem('currentUser', JSON.stringify(user));
+        this.authService.refreshCurrentUser();
 
         //{ observe: 'response' } option tells HttpClient that I want the full HttpResponse not just the body, so I can access the header, which contains the authorization
         return this.http.post<IUser>(url, user, { observe: 'response' });
@@ -57,13 +59,10 @@ export class UserService {
             );
     }
 
-    updateUser(
-        currentUser: IUser | null,
-        updatedUser: IUser
-    ): Observable<IUser> {
+    updateUser(currentUser: string, updatedUser: IUser): Observable<IUser> {
         const url = `${this.apiUrl}/auth/users/update`;
         return this.http.patch<IUser>(url, {
-            originalUsername: currentUser?.username,
+            originalUsername: currentUser as string,
             ...updatedUser,
         });
     }

@@ -1,3 +1,7 @@
+.home-container {
+    max-width: 100%;
+}
+
 .username {
     color: #ff73f2;
 }
@@ -6,7 +10,7 @@
     display: flex;
     flex-direction: column;
     gap: 1em;
-    padding: 1em 4em 0;
+    padding: 1em 0;
 }
 
 .add-search-wrapper {
@@ -14,6 +18,11 @@
     flex-direction: row;
     gap: 1em;
     justify-content: space-between;
+    margin-right: 3em;
+
+    .bottom-margin {
+        margin-bottom: 3em;
+    }
 }
 
 .add-container {
@@ -88,7 +97,6 @@ input:-webkit-autofill:active {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(12em, 1fr));
     gap: 1em;
-    max-width: 60em;
     margin: auto;
     list-style: none;
     padding-left: 0;
@@ -114,7 +122,6 @@ input:-webkit-autofill:active {
     margin-top: 8px;
 }
 
-/* Base class for action buttons */
 .action-button {
     background: none;
     border: none;
@@ -124,9 +131,8 @@ input:-webkit-autofill:active {
     position: relative;
 }
 
-/* Base class for tooltip */
 .action-button-tooltip::before {
-    content: attr(data-tooltip); /* Use a data attribute for dynamic content */
+    content: attr(data-tooltip);
     position: absolute;
     visibility: hidden;
     opacity: 0;
@@ -140,13 +146,11 @@ input:-webkit-autofill:active {
     white-space: nowrap;
 }
 
-/* Show the tooltip when hovering over the button */
 .action-button:hover .action-button-tooltip::before {
     visibility: visible;
     opacity: 1;
 }
 
-/* Specific classes for each button */
 .delete-button .action-button-tooltip::before {
     content: 'Delete this book';
 }

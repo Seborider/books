@@ -97,7 +97,10 @@ export class EditAccountComponent implements OnInit, OnDestroy {
         const updatedUser = this.updateUserForm.value;
 
         this.userService
-            .updateUser(this.currentUser?.user as IUser, updatedUser as IUser)
+            .updateUser(
+                this.currentUser?.user?.username as string,
+                updatedUser as IUser
+            )
             .subscribe({
                 next: () => {
                     this.authService.logout();
